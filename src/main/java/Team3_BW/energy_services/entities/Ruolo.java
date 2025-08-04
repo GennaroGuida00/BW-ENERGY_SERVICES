@@ -45,5 +45,14 @@ public class Ruolo {
     public void setUtenti(Set<Utente> utenti) {
         this.utenti = utenti;
     }
+
+    @Override
+    public String toString() {
+        return "Ruolo{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", utenti=" + utenti +
+                '}';
+    }
 }
 

@@ -177,7 +177,8 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "ragioneSociale='" + ragioneSociale + '\'' +
+                "id=" + id +
+                ", ragioneSociale='" + ragioneSociale + '\'' +
                 ", partitaIva='" + partitaIva + '\'' +
                 ", email='" + email + '\'' +
                 ", dataInserimento=" + dataInserimento +

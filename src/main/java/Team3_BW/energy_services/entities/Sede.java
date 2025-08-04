@@ -5,17 +5,17 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "sites")
-public class Site {
+public class Sede {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     private TipoSede type;
     //CLIENTE
     @OneToOne
-    @JoinColumn(name ="id_address")
+    @JoinColumn(name = "id_address")
     private Address address;
 
-    public Site() {
+    public Sede() {
     }
 
     public long getId() {
@@ -36,5 +36,14 @@ public class Site {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Sede{" +
+                "id=" + id +
+                ", type=" + type +
+                ", address=" + address +
+                '}';
     }
 }

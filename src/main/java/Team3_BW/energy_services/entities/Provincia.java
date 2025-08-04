@@ -1,15 +1,13 @@
 package Team3_BW.energy_services.entities;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "provincie")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Provincia {
     @Id

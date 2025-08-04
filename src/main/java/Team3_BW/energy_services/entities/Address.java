@@ -12,8 +12,10 @@ public class Address {
     private String civico;
     private String località;
     private String cap;
-   //COMUNE
-
+    //COMUNE
+    @ManyToOne
+    @JoinColumn(name = "comune_id")
+    private Comune nome_comune;
 
     public Address(String via, String civico, String località, String cap) {
         this.via = via;
@@ -61,5 +63,15 @@ public class Address {
         this.cap = cap;
     }
 
-
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", via='" + via + '\'' +
+                ", civico='" + civico + '\'' +
+                ", località='" + località + '\'' +
+                ", cap='" + cap + '\'' +
+                ", nome_comune=" + nome_comune +
+                '}';
+    }
 }

@@ -9,6 +9,9 @@ public class StatoFattura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "fattura_id")
+    private Fattura fattura;
     @Column(nullable = false)
     private String tipologiaFatture;
 
@@ -29,6 +32,15 @@ public class StatoFattura {
 
     public void setTipologiaFatture(String tipologiaFatture) {
         this.tipologiaFatture = tipologiaFatture;
+    }
+
+    @Override
+    public String toString() {
+        return "StatoFattura{" +
+                "id=" + id +
+                ", fattura=" + fattura +
+                ", tipologiaFatture='" + tipologiaFatture + '\'' +
+                '}';
     }
 }
 
