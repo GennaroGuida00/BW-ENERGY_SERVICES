@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,10 +26,9 @@ public class Comune {
 
     @OneToMany
     @JoinColumn(name = "provincia_id")
-    private List<Provincia> provincia;
+    private List<Provincia> provinciaList = new ArrayList<>();
 
-    public Comune(List<Provincia> provincia, String comune, String denominazioneInItaliano, int progressivoDelComune, int codiceProvincia) {
-        this.provincia = provincia;
+    public Comune(String comune, String denominazioneInItaliano, int progressivoDelComune, int codiceProvincia) {
         this.comune = comune;
         this.denominazioneInItaliano = denominazioneInItaliano;
         this.progressivoDelComune = progressivoDelComune;
