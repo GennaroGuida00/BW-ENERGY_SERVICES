@@ -1,5 +1,6 @@
 package Team3_BW.energy_services.entities;
 
+import Team3_BW.energy_services.enums.TipologiaCliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

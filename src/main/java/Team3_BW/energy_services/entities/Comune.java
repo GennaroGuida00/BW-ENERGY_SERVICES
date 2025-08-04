@@ -1,4 +1,4 @@
-package entities;
+package Team3_BW.energy_services.entities;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -12,7 +12,23 @@ public class StatoFattura {
     @Column(nullable = false)
     private String tipologiaFatture;
 
-    // Getter e Setter
-    // ...
+    public StatoFattura() {
+    }
+
+    public StatoFattura(String tipologiaFatture) {
+        this.tipologiaFatture = tipologiaFatture;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTipologiaFatture() {
+        return tipologiaFatture;
+    }
+
+    public void setTipologiaFatture(String tipologiaFatture) {
+        this.tipologiaFatture = tipologiaFatture;
+    }
 }
 

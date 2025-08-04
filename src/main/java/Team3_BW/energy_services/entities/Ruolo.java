@@ -18,7 +18,32 @@ public class Ruolo {
     @ManyToMany(mappedBy = "ruoli")
     private Set<Utente> utenti = new HashSet<>();
 
-    // Getter e Setter
-    // ...
+    public Ruolo() {
+    }
+
+    public Ruolo(String nome, Set<Utente> utenti) {
+        this.nome = nome;
+        this.utenti = utenti;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Set<Utente> getUtenti() {
+        return utenti;
+    }
+
+    public void setUtenti(Set<Utente> utenti) {
+        this.utenti = utenti;
+    }
 }
 
