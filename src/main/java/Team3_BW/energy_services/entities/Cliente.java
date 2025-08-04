@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 @ToString
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String ragioneSociale;
     private String partitaIva;
@@ -52,6 +51,10 @@ public class Cliente {
         this.logoAziendale = logoAziendale;
         this.fatture = fatture;
         this.tipologiaCliente = tipologiaCliente;
+    }
+
+    public String getId() {
+        return String.valueOf(id);
     }
 
     public String getRagioneSociale() {

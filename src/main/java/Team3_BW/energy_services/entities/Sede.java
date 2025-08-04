@@ -4,16 +4,20 @@ import Team3_BW.energy_services.enums.TipoSede;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "sites")
+@Table(name = "sedi")
 public class Sede {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
+    @Enumerated(EnumType.STRING)
     private TipoSede type;
     //CLIENTE
     @OneToOne
     @JoinColumn(name = "id_address")
     private Address address;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
 
     public Sede() {
     }
