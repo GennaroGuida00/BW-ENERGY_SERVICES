@@ -8,16 +8,16 @@ import java.time.LocalDate;
 
 public record NewClienteDTO(
 
-        @NotEmpty(message = "l'ID dell'evento è obbligatorio!")
+        @NotEmpty(message = "obbligatorio!")
         @Size(min = 2, max = 40, message = "Il nome deve essere di lunghezza compresa tra 2 e 40")
         String ragioneSociale,
-        @NotEmpty(message = "Il cognome è obbligatorio!")
+        @NotEmpty(message = "obbligatoria!")
         @Size(min = 2, max = 40, message = "Il cognome deve essere di lunghezza compresa tra 2 e 40")
         String partitaIva,
-        @NotEmpty(message = "La password è obbligatoria!")
+        @NotEmpty(message = "obbligatoria!")
         @Size(min = 4)
         String email,
-        @NotEmpty(message = "obbligatorio!")
+        @NotEmpty(message = "obbligatoria!")
         @Size(min = 4)
         LocalDate dataInserimento,
         @NotEmpty(message = "La m è obbligatoria!")

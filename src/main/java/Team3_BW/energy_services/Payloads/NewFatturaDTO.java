@@ -8,10 +8,9 @@ import java.time.LocalDate;
 
 public record NewFatturaDTO(
 
-        @NotEmpty(message = "l'ID dell'evento è obbligatorio!")
-        @Size(min = 2, max = 40, message = "Il nome deve essere di lunghezza compresa tra 2 e 40")
+        @NotEmpty(message = "obbligatoria!")
         LocalDate data,
-        @NotEmpty(message = "Il cognome è obbligatorio!")
+        @NotEmpty(message = "obbligatorio!")
         @Size(min = 2, max = 40, message = "Il cognome deve essere di lunghezza compresa tra 2 e 40")
         double importo)
 {}
