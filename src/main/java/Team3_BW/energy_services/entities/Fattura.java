@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
@@ -16,7 +17,6 @@ public class Fattura {
     private long id;
     private LocalDate data;
     private Double importo;
-    private String stato;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -27,7 +27,6 @@ public class Fattura {
     public Fattura(LocalDate data, Double importo, String stato, Cliente cliente) {
         this.data = data;
         this.importo = importo;
-        this.stato = stato;
         this.cliente = cliente;
     }
 
@@ -47,14 +46,6 @@ public class Fattura {
         this.importo = importo;
     }
 
-    public String getStato() {
-        return stato;
-    }
-
-    public void setStato(String stato) {
-        this.stato = stato;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -63,4 +54,13 @@ public class Fattura {
         this.cliente = cliente;
     }
 
+    @Override
+    public String toString() {
+        return "Fattura{" +
+                "id=" + id +
+                ", data=" + data +
+                ", importo=" + importo +
+                ", cliente=" + cliente +
+                '}';
+    }
 }
