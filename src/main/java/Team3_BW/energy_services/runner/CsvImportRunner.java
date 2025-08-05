@@ -1,4 +1,4 @@
-package Team3_BW.energy_services;
+package Team3_BW.energy_services.runner;
 
 import Team3_BW.energy_services.services.ComuneService;
 import Team3_BW.energy_services.services.ProvinciaService;
@@ -20,9 +20,9 @@ public class CsvImportRunner implements CommandLineRunner {
         String comuPath = "src/main/resources/comuni&province/comuni-italiani.csv";
 
         try {
-            //this.provinciaService.importProvinciaFromCsv(provPath);
+            this.provinciaService.importProvinciaFromCsv(provPath);
             // System.out.println("province imprtate");
-            this.comuneService.importComuniFromCsv(comuPath);
+            //this.comuneService.importComuniFromCsv(comuPath);
             System.out.println("done");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

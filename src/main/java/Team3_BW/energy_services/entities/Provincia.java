@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "provincie")
+@Table(name = "province")
 @Getter
 @Setter
 @ToString
