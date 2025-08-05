@@ -41,7 +41,6 @@ public class Comune {
                 ", progressivoDelComune=" + progressivoDelComune +
                 ", denominazioneInItaliano='" + denominazioneInItaliano + '\'' +
                 ", nomeComune='" + nomeComune + '\'' +
-                ", provinciaList=" + provinciaList +
                 '}';
     }
 
