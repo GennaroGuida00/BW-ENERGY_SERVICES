@@ -6,20 +6,28 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "sedi")
 public class Sede {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Enumerated(EnumType.STRING)
     private TipoSede type;
-    //CLIENTE
+
     @OneToOne
     @JoinColumn(name = "id_address")
-    private Address address;
+    private Indirizzo indirizzo;
+
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
     public Sede() {
+    }
+
+    public Sede(TipoSede type, Indirizzo indirizzo, Cliente cliente) {
+        this.type = type;
+        this.indirizzo = indirizzo;
+        this.cliente = cliente;
     }
 
     public long getId() {
@@ -34,12 +42,20 @@ public class Sede {
         this.type = type;
     }
 
-    public Address getAddress() {
-        return address;
+    public Indirizzo getIndirizzo() {
+        return indirizzo;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setIndirizzo(Indirizzo indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override
@@ -47,7 +63,9 @@ public class Sede {
         return "Sede{" +
                 "id=" + id +
                 ", type=" + type +
-                ", address=" + address +
+                ", indirizzo=" + indirizzo +
+                ", cliente=" + cliente +
                 '}';
     }
 }
+

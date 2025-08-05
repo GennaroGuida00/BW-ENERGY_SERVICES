@@ -3,8 +3,8 @@ package Team3_BW.energy_services.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "addresses")
-public class Address {
+@Table(name = "indirizzi")
+public class Indirizzo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
@@ -12,19 +12,19 @@ public class Address {
     private String civico;
     private String località;
     private String cap;
-    //COMUNE
     @ManyToOne
     @JoinColumn(name = "comune_id")
     private Comune nome_comune;
 
-    public Address(String via, String civico, String località, String cap) {
+    public Indirizzo(String via, String civico, String località, String cap, Comune nome_comune) {
         this.via = via;
         this.civico = civico;
         this.località = località;
         this.cap = cap;
+        this.nome_comune = nome_comune;
     }
 
-    public Address() {
+    public Indirizzo() {
     }
 
     public long getId() {
@@ -61,6 +61,14 @@ public class Address {
 
     public void setCap(String cap) {
         this.cap = cap;
+    }
+
+    public Comune getNome_comune() {
+        return nome_comune;
+    }
+
+    public void setNome_comune(Comune nome_comune) {
+        this.nome_comune = nome_comune;
     }
 
     @Override

@@ -2,7 +2,9 @@ package Team3_BW.energy_services.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,15 +25,15 @@ public class Utente {
     private String password;
     private String avatar;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "utente_ruolo",
             joinColumns = @JoinColumn(name = "utente_id"),
             inverseJoinColumns = @JoinColumn(name = "ruolo_id")
     )
-    private Set<Ruolo> ruoli = new HashSet<>();
+    private List<Ruolo> ruoli = new ArrayList<>();
 
-    public Utente(String username, String email, String nome, String cognome, String password, String avatar, Set<Ruolo> ruoli) {
+    public Utente(String username, String email, String nome, String cognome, String password, String avatar, List<Ruolo> ruoli) {
         this.username = username;
         this.email = email;
         this.nome = nome;
@@ -45,11 +47,11 @@ public class Utente {
         return id;
     }
 
-    public Set<Ruolo> getRuoli() {
+    public List<Ruolo> getRuoli() {
         return ruoli;
     }
 
-    public void setRuoli(Set<Ruolo> ruoli) {
+    public void setRuoli(List<Ruolo> ruoli) {
         this.ruoli = ruoli;
     }
 
