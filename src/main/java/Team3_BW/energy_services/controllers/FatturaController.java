@@ -14,14 +14,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("")
 public class FatturaController {
 
     @Autowired
     private FatturaService fatturaService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('Utente_Normale')")
+    @PreAuthorize("hasAuthority('')")
     public Page<Fattura> findAll(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "10") int size,
                                  @RequestParam(defaultValue = "id") String sortBy

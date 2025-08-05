@@ -79,7 +79,7 @@ public class ClienteService {
 
         Cliente modifiedCliente = this.clienteRepository.save(found);
 
-        log.info("L'utente con id " + found.getId() + " è stato modificato!");
+        log.info("Cliente con id " + found.getId() + " è stato modificato!");
 
         return modifiedCliente;
     }

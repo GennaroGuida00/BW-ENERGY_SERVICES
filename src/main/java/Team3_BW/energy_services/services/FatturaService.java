@@ -56,7 +56,7 @@ import org.springframework.stereotype.Service;
 
             Fattura modifiedFattura = this.fatturaRepository.save(found);
 
-            log.info("L'utente con id " + found.getId() + " è stato modificato!");
+            log.info("La fattura con id " + found.getId() + " è stato modificato!");
 
             return modifiedFattura;
         }
