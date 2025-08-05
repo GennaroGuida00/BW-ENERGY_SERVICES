@@ -1,4 +1,4 @@
-package Team3_BW.energy_services.controlers;
+package Team3_BW.energy_services.controllers;
 
 import Team3_BW.energy_services.entities.StatoFattura;
 import Team3_BW.energy_services.payloads.StatoFatturaDTO;
