@@ -1,0 +1,46 @@
+package Team3_BW.energy_services.controllers;
+
+import Team3_BW.energy_services.Payloads.NewClienteDTO;
+import Team3_BW.energy_services.Payloads.NewClienteRespDTO;
+import Team3_BW.energy_services.entities.Cliente;
+import Team3_BW.energy_services.services.ClienteService;
+import jakarta.validation.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/clienti")
+public class ClienteController {
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('')")
+    public Page<Cliente> findAll(@RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "10") int size,
+                                 @RequestParam(defaultValue = "id") String sortBy) {
+        return clienteService.findAll(page, size, sortBy);
+    }
+
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public NewClienteRespDTO save(@RequestBody @Validated NewClienteDTO payload, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
+            throw new ValidationException("Validazione fallita");
+        }
+        Cliente newCliente = clienteService.save(payload);
+        return new NewClienteRespDTO(newCliente.getId());
+    }
+
+    @GetMapping("/{clienteId}")
+    @PreAuthorize("hasAuthority('')")
+    public Cliente getById(@PathVariable long clienteId) {
+        return clienteService.findById(clienteId);
+    }
+}

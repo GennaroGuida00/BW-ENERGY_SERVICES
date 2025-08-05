@@ -10,8 +10,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Getter
 @AllArgsConstructor
+@Getter
 @ToString
 public class Cliente {
     @Id
@@ -34,6 +34,9 @@ public class Cliente {
     private List<Fattura> fatture;
     @Enumerated(EnumType.STRING)
     private TipologiaCliente tipologiaCliente;
+
+    public Cliente() {
+    }
 
     public Cliente(String ragioneSociale, String partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, Double fatturatoAnnuale, String pec, int telefono, String emailContatto, String nomeContatto, String cognomeContatto, int telefonoContatto, String logoAziendale, List<Fattura> fatture, TipologiaCliente tipologiaCliente) {
         this.ragioneSociale = ragioneSociale;
@@ -176,7 +179,8 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "ragioneSociale='" + ragioneSociale + '\'' +
+                "id=" + id +
+                ", ragioneSociale='" + ragioneSociale + '\'' +
                 ", partitaIva='" + partitaIva + '\'' +
                 ", email='" + email + '\'' +
                 ", dataInserimento=" + dataInserimento +

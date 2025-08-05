@@ -18,15 +18,16 @@ public class Fattura {
     private long id;
     private LocalDate data;
     private Double importo;
-    private String stato;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    public Fattura() {
+    }
+
     public Fattura(LocalDate data, Double importo, String stato, Cliente cliente) {
         this.data = data;
         this.importo = importo;
-        this.stato = stato;
         this.cliente = cliente;
     }
 
@@ -46,14 +47,6 @@ public class Fattura {
         this.importo = importo;
     }
 
-    public String getStato() {
-        return stato;
-    }
-
-    public void setStato(String stato) {
-        this.stato = stato;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -65,9 +58,9 @@ public class Fattura {
     @Override
     public String toString() {
         return "Fattura{" +
-                "data=" + data +
+                "id=" + id +
+                ", data=" + data +
                 ", importo=" + importo +
-                ", stato='" + stato + '\'' +
                 ", cliente=" + cliente +
                 '}';
     }
