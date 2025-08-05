@@ -41,10 +41,10 @@ public class ExceptionsHandler {
         return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
     }
 
-    @ExceptionHandler(Exception.class) // Tutte le eccezioni non gestite dagli altri metodi risulteranno essere un Server Error (500)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) // 500
     public ErrorsDTO handleServerError(Exception ex) {
-        ex.printStackTrace(); // E' importante avere il print dello stack trace per avere un'indicazione utile per debuggare/fixare l'errore
+        ex.printStackTrace();
         return new ErrorsDTO("C'è stato un errore generico! Giuro che lo risolveremo presto!", LocalDateTime.now());
     }
 }
