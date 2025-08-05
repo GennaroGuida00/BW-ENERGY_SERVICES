@@ -4,85 +4,49 @@ import Team3_BW.energy_services.entities.Utente;
 import Team3_BW.energy_services.payloads.UtenteDTO;
 import Team3_BW.energy_services.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/utenti")
+@RequestMapping("/utenti")
 public class UtenteController {
     @Autowired
     private UtenteService utenteService;
 
     @GetMapping
-    public List<UtenteDTO> getAll() {
-        return utenteService.findAll().stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
-    }
+    public Page<Utente> findAll(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "20") int size,
+                                @RequestParam(defaultValue = "id") String sortBy) {
+        return utenteService.findAll(page, size, sortBy);
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UtenteDTO> getById(@PathVariable Long id) {
-        return utenteService.findById(id)
-                .map(this::toDTO)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public UtenteDTO create(@RequestBody UtenteDTO utenteDTO) {
-        Utente utente = fromDTO(utenteDTO);
-        Utente saved = utenteService.save(utente);
-        return toDTO(saved);
+    @ResponseStatus(HttpStatus.CREATED)
+    public UtenteDTO save(@RequestBody @Validated UtenteDTO payload) {
+        Utente newUtente = utenteService.save(payload);
+        return new UtenteDTO(newUtente.getId());
+    }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO utenteDTO) {
-        return utenteService.findById(id)
-                .map(u -> {
-                    u.setNome(utenteDTO.nome());
-                    u.setCognome(utenteDTO.cognome());
-                    u.setEmail(utenteDTO.email());
-                    u.setUsername(utenteDTO.username());
-                    u.setAvatar(utenteDTO.avatar());
-                    Utente updated = utenteService.save(u);
-                    return ResponseEntity.ok(toDTO(updated));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{utenteId}")
+    public UtenteDTO getById(@PathVariable long utenteId) {
+        return toDTO(utenteService.findByIdOrThrow(utenteId));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (utenteService.findById(id).isPresent()) {
-            utenteService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    @PutMapping("/{utenteId}")
+    public UtenteDTO getByIdAndUpdate(@PathVariable long utenteId, @RequestBody UtenteDTO payload) {
+        return toDTO(utenteService.findByIdAndUpdate(utenteId, payload));
     }
 
-    private UtenteDTO toDTO(Utente utente) {
-        Set<String> ruoli = utente.getRuoli().stream().map(r -> r.getNome()).collect(Collectors.toSet());
-        return new UtenteDTO(
-                utente.getId(),
-                utente.getUsername(),
-                utente.getEmail(),
-                utente.getNome(),
-                utente.getCognome(),
-                utente.getAvatar(),
-                ruoli
-        );
+    @DeleteMapping("/{utenteId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void getByIdAndDelete(@PathVariable long utenteId) {
+        utenteService.findByIdAndDelete(utenteId);
     }
 
-    private Utente fromDTO(UtenteDTO dto) {
-        Utente utente = new Utente();
-        utente.setUsername(dto.username());
-        utente.setEmail(dto.email());
-        utente.setNome(dto.nome());
-        utente.setCognome(dto.cognome());
-        utente.setAvatar(dto.avatar());
-        return utente;
-    }
+
 }
