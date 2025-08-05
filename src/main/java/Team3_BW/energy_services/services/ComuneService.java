@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 @Service
 public class ComuneService {
@@ -18,7 +17,7 @@ public class ComuneService {
     @Autowired
     private ProvinciaService provinciaService;
 
-    public void importComuneFromCsv(String filePath) throws IOException {
+    public void importComuneFromCsv(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             br.readLine(); //salta prima riga
@@ -36,11 +35,14 @@ public class ComuneService {
                     comune.setProgressivoDelComune(Integer.parseInt(values[1]));
                     comune.setDenominazioneInItaliano(values[2]);
                     comune.setProvinciaRef(provinciaLink);
-                    this.comuneRepo.save(comune);
+                    System.out.println("all good");
+                    //this.comuneRepo.save(comune);
                 } else {
                     System.out.println("provincia non trovata" + values[3]);
                 }
             }
+        } catch (Exception e) {
+            throw new RuntimeException("errore nella lettura del file");
         }
     }
 }
