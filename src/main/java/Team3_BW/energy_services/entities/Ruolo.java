@@ -2,8 +2,9 @@ package Team3_BW.energy_services.entities;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "ruoli")
@@ -16,12 +17,12 @@ public class Ruolo {
     private String nome;
 
     @ManyToMany(mappedBy = "ruoli")
-    private Set<Utente> utenti = new HashSet<>();
+    private List<Utente> utenti = new ArrayList<>();
 
     public Ruolo() {
     }
 
-    public Ruolo(String nome, Set<Utente> utenti) {
+    public Ruolo(String nome, List<Utente> utenti) {
         this.nome = nome;
         this.utenti = utenti;
     }
@@ -38,11 +39,11 @@ public class Ruolo {
         this.nome = nome;
     }
 
-    public Set<Utente> getUtenti() {
+    public List<Utente> getUtenti() {
         return utenti;
     }
 
-    public void setUtenti(Set<Utente> utenti) {
+    public void setUtenti(List<Utente> utenti) {
         this.utenti = utenti;
     }
 
