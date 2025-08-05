@@ -56,8 +56,8 @@ public class Cliente {
         this.tipologiaCliente = tipologiaCliente;
     }
 
-    public String getId() {
-        return String.valueOf(id);
+    public long getId() {
+        return id;
     }
 
     public String getRagioneSociale() {

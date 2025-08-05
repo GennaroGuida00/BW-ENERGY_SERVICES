@@ -1,6 +1,7 @@
 package Team3_BW.energy_services.Payloads;
 
-import Team3_BW.energy_services.entities.TipologiaCliente;
+
+import Team3_BW.energy_services.enums.TipologiaCliente;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
