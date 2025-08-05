@@ -7,7 +7,6 @@ import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.repositories.FatturaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,6 +41,24 @@ import org.springframework.stereotype.Service;
 
         public Fattura findById(long fatturaId) {
             return this.fatturaRepository.findById(fatturaId).orElseThrow(() -> new NotFoundException(fatturaId));
+        }
+
+        public void findByIdAndDelete(long fatturaId) {
+            Fattura found = this.findById(fatturaId);
+            this.fatturaRepository.delete(found);
+        }
+
+        public Fattura findByIdAndUpdate(long fatturaId, NewFatturaDTO payload) {
+            Fattura found = this.findById(fatturaId);
+
+            found.setData(payload.data());
+            found.setImporto(payload.importo());
+
+            Fattura modifiedFattura = this.fatturaRepository.save(found);
+
+            log.info("L'utente con id " + found.getId() + " è stato modificato!");
+
+            return modifiedFattura;
         }
     }
 

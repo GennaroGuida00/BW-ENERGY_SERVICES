@@ -50,4 +50,17 @@ public class FatturaController {
         return this.fatturaService.findById(fatturaId);
     }
 
+    @PutMapping("/{fatturaId}")
+    @PreAuthorize("hasAuthority('ADMIN')") // <-- Solo gli ADMIN possono modificare i profili di un qualsiasi utente
+    public Fattura getByIdAndUpdate(@PathVariable long userId, @RequestBody NewFatturaDTO payload) {
+        return this.fatturaService.findByIdAndUpdate(userId, payload);
+    }
+
+    @DeleteMapping("/fatturaId}")
+    @PreAuthorize("hasAuthority('')") // <-- Solo gli ADMIN possono cancellare i profili di un qualsiasi utente
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void getByIdAndDelete(@PathVariable long fatturaId) {
+        this.fatturaService.findByIdAndDelete(fatturaId);
+    }
+
 }

@@ -43,4 +43,17 @@ public class ClienteController {
     public Cliente getById(@PathVariable long clienteId) {
         return clienteService.findById(clienteId);
     }
+
+    @PutMapping("/{clienteId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Cliente getByIdAndUpdate(@PathVariable long userId, @RequestBody NewClienteDTO payload) {
+        return this.clienteService.findByIdAndUpdate(userId, payload);
+    }
+
+    @DeleteMapping("/clienteId}")
+    @PreAuthorize("hasAuthority('')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void getByIdAndDelete(@PathVariable long clienteId) {
+        this.clienteService.findByIdAndDelete(clienteId);
+    }
 }

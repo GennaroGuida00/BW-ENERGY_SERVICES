@@ -3,13 +3,10 @@ package Team3_BW.energy_services.services;
 
 import Team3_BW.energy_services.Payloads.NewClienteDTO;
 import Team3_BW.energy_services.entities.Cliente;
-import Team3_BW.energy_services.entities.Fattura;
-import Team3_BW.energy_services.entities.TipologiaCliente;
 import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.repositories.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -56,4 +53,35 @@ public class ClienteService {
     public Cliente findById(long Id) {
         return this.clienteRepository.findById(Id).orElseThrow(() -> new NotFoundException(Id));
     }
+
+    public void findByIdAndDelete(long clienteId) {
+        Cliente found = this.findById(clienteId);
+        this.clienteRepository.delete(found);
+    }
+
+    public Cliente findByIdAndUpdate(long clienteId, NewClienteDTO payload) {
+        Cliente found = this.findById(clienteId);
+
+        found.setRagioneSociale(payload.ragioneSociale());
+        found.setPartitaIva(payload.partitaIva());
+        found.setEmail(payload.email());
+        found.setDataInserimento(payload.dataInserimento());
+        found.setDataUltimoContatto(payload.dataUltimoContatto());
+        found.setFatturatoAnnuale(payload.fatturatoAnnuale());
+        found.setPec(payload.pec());
+        found.setTelefono(payload.telefono());
+        found.setEmailContatto(payload.emailContatto());
+        found.setNomeContatto(payload.nomeContatto());
+        found.setCognomeContatto(payload.cognomeContatto());
+        found.setTelefonoContatto(payload.telefonoContatto());
+        found.setLogoAziendale(payload.logoAziendale());
+        found.setTipologiaCliente(payload.tipologiaCliente());
+
+        Cliente modifiedCliente = this.clienteRepository.save(found);
+
+        log.info("L'utente con id " + found.getId() + " è stato modificato!");
+
+        return modifiedCliente;
+    }
+
 }
