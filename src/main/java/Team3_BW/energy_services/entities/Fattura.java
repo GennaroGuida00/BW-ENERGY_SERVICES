@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
@@ -28,6 +27,10 @@ public class Fattura {
         this.data = data;
         this.importo = importo;
         this.cliente = cliente;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public LocalDate getData() {

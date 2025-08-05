@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.services;
 
 import Team3_BW.energy_services.entities.StatoFattura;
-import Team3_BW.energy_services.repositoryes.StatoFatturaRepository;
+import Team3_BW.energy_services.repositories.StatoFatturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

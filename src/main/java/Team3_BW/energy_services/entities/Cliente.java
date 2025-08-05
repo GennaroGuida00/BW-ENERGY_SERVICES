@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @ToString
 public class Cliente {
     @Id
@@ -35,6 +34,9 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private TipologiaCliente tipologiaCliente;
 
+
+
+
     public Cliente(String ragioneSociale, String partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, Double fatturatoAnnuale, String pec, int telefono, String emailContatto, String nomeContatto, String cognomeContatto, int telefonoContatto, String logoAziendale, List<Fattura> fatture, TipologiaCliente tipologiaCliente) {
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
@@ -52,9 +54,11 @@ public class Cliente {
         this.fatture = fatture;
         this.tipologiaCliente = tipologiaCliente;
     }
+    public Cliente() {
+    }
 
-    public String getId() {
-        return String.valueOf(id);
+    public long getId() {
+        return id;
     }
 
     public String getRagioneSociale() {

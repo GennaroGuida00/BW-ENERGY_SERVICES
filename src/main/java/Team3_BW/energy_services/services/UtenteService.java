@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.services;
 
 import Team3_BW.energy_services.entities.Utente;
-import Team3_BW.energy_services.repositoryes.UtenteRepository;
+import Team3_BW.energy_services.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

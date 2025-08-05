@@ -20,8 +20,8 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
-    @Autowired
-    private PasswordEncoder bcrypt;
+//    @Autowired
+//    private PasswordEncoder bcrypt;
 
     public Cliente save(NewClienteDTO payload) {
 
@@ -77,11 +77,7 @@ public class ClienteService {
         found.setLogoAziendale(payload.logoAziendale());
         found.setTipologiaCliente(payload.tipologiaCliente());
 
-        Cliente modifiedCliente = this.clienteRepository.save(found);
-
-        log.info("Cliente con id " + found.getId() + " è stato modificato!");
-
-        return modifiedCliente;
+        return clienteRepository.save(found);
     }
 
 }

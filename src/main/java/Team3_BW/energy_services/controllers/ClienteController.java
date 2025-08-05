@@ -50,7 +50,7 @@ public class ClienteController {
         return this.clienteService.findByIdAndUpdate(userId, payload);
     }
 
-    @DeleteMapping("/clienteId}")
+    @DeleteMapping("/{clienteId}")
     @PreAuthorize("hasAuthority('')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void getByIdAndDelete(@PathVariable long clienteId) {

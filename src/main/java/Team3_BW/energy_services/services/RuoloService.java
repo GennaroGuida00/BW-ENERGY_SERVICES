@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.services;
 
 import Team3_BW.energy_services.entities.Ruolo;
-import Team3_BW.energy_services.repositoryes.RuoloRepository;
+import Team3_BW.energy_services.repositories.RuoloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

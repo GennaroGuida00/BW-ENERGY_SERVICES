@@ -20,8 +20,8 @@ import org.springframework.stereotype.Service;
 
         @Autowired
         private FatturaRepository fatturaRepository;
-        @Autowired
-        private PasswordEncoder bcrypt;
+//        @Autowired
+//        private PasswordEncoder bcrypt;
 
         public Fattura save(NewFatturaDTO payload) {
 
@@ -54,11 +54,7 @@ import org.springframework.stereotype.Service;
             found.setData(payload.data());
             found.setImporto(payload.importo());
 
-            Fattura modifiedFattura = this.fatturaRepository.save(found);
-
-            log.info("La fattura con id " + found.getId() + " è stato modificato!");
-
-            return modifiedFattura;
+            return  fatturaRepository.save(found);
         }
     }
 

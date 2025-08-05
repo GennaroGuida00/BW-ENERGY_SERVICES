@@ -56,7 +56,7 @@ public class FatturaController {
         return this.fatturaService.findByIdAndUpdate(userId, payload);
     }
 
-    @DeleteMapping("/fatturaId}")
+    @DeleteMapping("/{fatturaId}")
     @PreAuthorize("hasAuthority('')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void getByIdAndDelete(@PathVariable long fatturaId) {

@@ -1,4 +1,4 @@
-package Team3_BW.energy_services.repositoryes;
+package Team3_BW.energy_services.repositories;
 
 import Team3_BW.energy_services.entities.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
