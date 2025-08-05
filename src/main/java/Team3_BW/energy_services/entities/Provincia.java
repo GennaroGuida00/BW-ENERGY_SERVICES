@@ -2,6 +2,9 @@ package Team3_BW.energy_services.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "province")
 public class Provincia {
@@ -12,6 +15,9 @@ public class Provincia {
     private String provincia;
     private String regione;
 
+    @OneToMany
+    private List<Comune> tuttiComuni = new ArrayList<>();
+
     public Provincia(String sigla, String provincia, String regione) {
         this.sigla = sigla;
         this.provincia = provincia;
@@ -20,8 +26,6 @@ public class Provincia {
 
     public Provincia() {
     }
-
-    ;
 
     public long getId() {
         return id;
