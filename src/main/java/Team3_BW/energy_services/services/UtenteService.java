@@ -23,8 +23,8 @@ public class UtenteService {
         return utenteRepository.findAll();
     }
 
-    public Optional<Utente> findById(Long id) {
-        return utenteRepository.findById(id);
+    public Utente findById(Long id) {
+        return utenteRepository.findById(id).orElseThrow(()->new NotFoundException(id));
     }
 
     public Page<Utente> findAll(int page, int size, String sortBy) {
@@ -36,7 +36,7 @@ public class UtenteService {
         return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException("Utente non trovato"));
     }
 
-    public Utente save(UtenteDTO dto) {
+    public Utente add(UtenteDTO dto) {
         Utente utente = new Utente();
         utente.setUsername(dto.username());
         utente.setEmail(dto.email());

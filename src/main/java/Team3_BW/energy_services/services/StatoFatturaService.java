@@ -23,17 +23,14 @@ public class StatoFatturaService {
         return statoFatturaRepository.findAll();
     }
 
-    public Page<StatoFattura> findAll(int page, int size, String sortBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        return statoFatturaRepository.findAll(pageable);
-    }
+//    public Page<StatoFattura> findAll(int page, int size, String sortBy) {
+//        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+//        return statoFatturaRepository.findAll(pageable);
+//    }
 
-    public Optional<StatoFattura> findById(Long id) {
-        return statoFatturaRepository.findById(id);
-    }
+    public StatoFattura findById(Long id) {
 
-    public StatoFattura findByIdOrThrow(Long id) {
-        return statoFatturaRepository.findById(id).orElseThrow(() -> new NotFoundException("Stato fattura non trovato"));
+        return statoFatturaRepository.findById(id).orElseThrow(()->new NotFoundException(id));
     }
 
     public StatoFattura save(StatoFattura statoFattura) {
@@ -41,17 +38,14 @@ public class StatoFatturaService {
     }
 
     public StatoFattura findByIdAndUpdate(Long id, StatoFatturaDTO dto) {
-        StatoFattura stato = findByIdOrThrow(id);
+        StatoFattura stato = findById(id);
         stato.setNome(dto.nome());
         return statoFatturaRepository.save(stato);
     }
 
     public void findByIdAndDelete(Long id) {
-        StatoFattura stato = findByIdOrThrow(id);
+        StatoFattura stato = findById(id);
         statoFatturaRepository.delete(stato);
     }
 
-    public void deleteById(Long id) {
-        statoFatturaRepository.deleteById(id);
-    }
 }
