@@ -9,38 +9,33 @@ public class StatoFattura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "fattura_id")
-    private Fattura fattura;
     @Column(nullable = false)
-    private String tipologiaFatture;
+    private String nome;
 
     public StatoFattura() {
     }
 
-    public StatoFattura(String tipologiaFatture) {
-        this.tipologiaFatture = tipologiaFatture;
+    public StatoFattura(String nome) {
+        this.nome = nome;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getTipologiaFatture() {
-        return tipologiaFatture;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipologiaFatture(String tipologiaFatture) {
-        this.tipologiaFatture = tipologiaFatture;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
     public String toString() {
         return "StatoFattura{" +
                 "id=" + id +
-                ", fattura=" + fattura +
-                ", tipologiaFatture='" + tipologiaFatture + '\'' +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 }
-
