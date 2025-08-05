@@ -13,6 +13,9 @@ public class Comune {
     private String denominazioneInItaliano;
     private String nomeComune;
 
+    @ManyToOne
+    private Provincia provinciaRef;
+
     public Comune() {
     }
 
@@ -68,5 +71,13 @@ public class Comune {
 
     public void setNomeComune(String nomeComune) {
         this.nomeComune = nomeComune;
+    }
+
+    public Provincia getProvinciaRef() {
+        return provinciaRef;
+    }
+
+    public void setProvinciaRef(Provincia provinciaRef) {
+        this.provinciaRef = provinciaRef;
     }
 }

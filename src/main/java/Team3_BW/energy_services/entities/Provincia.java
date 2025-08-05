@@ -15,7 +15,7 @@ public class Provincia {
     private String provincia;
     private String regione;
 
-    @OneToMany
+    @OneToMany(mappedBy = "provinciaRef")
     private List<Comune> tuttiComuni = new ArrayList<>();
 
     public Provincia(String sigla, String provincia, String regione) {
