@@ -1,6 +1,6 @@
 package Team3_BW.energy_services.runner;
 
-import Team3_BW.energy_services.services.ComuneService;
+
 import Team3_BW.energy_services.services.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CsvImportRunner implements CommandLineRunner {
 
-    @Autowired
-    private ComuneService comuneService;
+    //    @Autowired
+//    private ComuneService comuneService;
     @Autowired
     private ProvinciaService provinciaService;
 
