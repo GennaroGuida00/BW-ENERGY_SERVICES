@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 public class Provincia {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private long id;
     private String sigla;

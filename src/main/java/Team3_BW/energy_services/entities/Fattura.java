@@ -8,7 +8,6 @@ import lombok.ToString;
 import java.time.LocalDate;
 
 @Entity
-@Getter
 @AllArgsConstructor
 @ToString
 public class Fattura {
@@ -21,6 +20,9 @@ public class Fattura {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    public Fattura() {
+    }
 
     public Fattura(LocalDate data, Double importo, String stato, Cliente cliente) {
         this.data = data;

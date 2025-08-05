@@ -4,18 +4,18 @@ import Team3_BW.energy_services.enums.TipologiaCliente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Getter
-@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String ragioneSociale;
     private String partitaIva;

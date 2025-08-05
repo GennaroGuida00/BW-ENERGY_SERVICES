@@ -28,6 +28,7 @@ public class Comune {
     @JoinColumn(name = "provincia_id")
     private List<Provincia> provinciaList = new ArrayList<>();
 
+
     public Comune(String comune, String denominazioneInItaliano, int progressivoDelComune, int codiceProvincia) {
         this.nomeComune = comune;
         this.denominazioneInItaliano = denominazioneInItaliano;
