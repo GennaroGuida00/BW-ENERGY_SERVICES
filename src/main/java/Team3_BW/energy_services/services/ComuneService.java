@@ -33,8 +33,6 @@ public class ComuneService {
         provAlias.put("Ascoli Piceno", "Ascoli-Piceno");
         provAlias.put("Reggio Calabria", "Reggio-Calabria");
         provAlias.put("Vibo Valentia", "Vibo-Valentia");
-        provAlias.put("Sud Sardegna", "Medio Campidano");
-        provAlias.put("Sud Sardegna", "Carbonia Iglesias");
         provAlias.put("Monza e della Brianza", "Monza-Brianza");
 
 
@@ -46,22 +44,35 @@ public class ComuneService {
 
                 String nomeProvinciaDaCercare = values[3];
 
-                try {
-                    Provincia provinciaLink = this.provinciaService.findProv(nomeProvinciaDaCercare);
-                    Comune comune = new Comune();
-                    comune.setNomeComune(values[3]);
-                    comune.setDenominazioneInItaliano(values[2]);
-                    comune.setProvinciaRef(provinciaLink);
-                    this.comuneRepo.save(comune);
-                } catch (RuntimeException ex) {
-                    System.out.println(nomeProvinciaDaCercare + " eccezione");
-                    String provinciaGiusta = provAlias.get(nomeProvinciaDaCercare);
-                    Provincia p = this.provinciaService.findProv(provinciaGiusta);
-                    Comune comune = new Comune();
-                    comune.setNomeComune(values[3]);
-                    comune.setDenominazioneInItaliano(values[2]);
-                    comune.setProvinciaRef(p);
-                    this.comuneRepo.save(comune);
+                if (nomeProvinciaDaCercare.equals("Sud Sardegna")) {
+                    String[] provinceSud = {"Medio Campidano", "Carbonia Iglesias"};
+                    for (String prov : provinceSud) {
+                        Provincia provinciaLink = this.provinciaService.findProv(prov);
+                        Comune comune = new Comune();
+                        comune.setNomeComune(values[3]);
+                        comune.setDenominazioneInItaliano(values[2]);
+                        comune.setProvinciaRef(provinciaLink);
+                        this.comuneRepo.save(comune);
+                    }
+                } else {
+
+
+                    try {
+                        Provincia provinciaLink = this.provinciaService.findProv(nomeProvinciaDaCercare);
+                        Comune comune = new Comune();
+                        comune.setNomeComune(values[3]);
+                        comune.setDenominazioneInItaliano(values[2]);
+                        comune.setProvinciaRef(provinciaLink);
+                        this.comuneRepo.save(comune);
+                    } catch (RuntimeException ex) {
+                        String provinciaGiusta = provAlias.get(nomeProvinciaDaCercare);
+                        Provincia p = this.provinciaService.findProv(provinciaGiusta);
+                        Comune comune = new Comune();
+                        comune.setNomeComune(values[3]);
+                        comune.setDenominazioneInItaliano(values[2]);
+                        comune.setProvinciaRef(p);
+                        this.comuneRepo.save(comune);
+                    }
                 }
             }
 
