@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -15,18 +16,25 @@ public class Fattura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate data;
-    private Double importo;
+    private double importo;
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @ManyToOne
+    @JoinColumn(name = "stato_id")
+    private StatoFattura statoFattura;
+
+
     public Fattura() {
     }
 
-    public Fattura(LocalDate data, Double importo, String stato, Cliente cliente) {
+
+    public Fattura(LocalDate data, double importo, Cliente cliente, StatoFattura statoFattura) {
         this.data = data;
         this.importo = importo;
         this.cliente = cliente;
+        this.statoFattura = statoFattura;
     }
 
     public long getId() {
@@ -41,20 +49,28 @@ public class Fattura {
         this.data = data;
     }
 
-    public Double getImporto() {
-        return importo;
-    }
-
-    public void setImporto(Double importo) {
-        this.importo = importo;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void setImporto(double importo) {
+        this.importo = importo;
+    }
+
+    public double getImporto() {
+        return importo;
+    }
+
+    public StatoFattura getStatoFattura() {
+        return statoFattura;
+    }
+
+    public void setStatoFattura(StatoFattura statoFattura) {
+        this.statoFattura = statoFattura;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.controllers;
 
-import Team3_BW.energy_services.Payloads.NewFatturaDTO;
-import Team3_BW.energy_services.Payloads.NewFatturaRespDTO;
+import Team3_BW.energy_services.payloads.NewFatturaDTO;
+import Team3_BW.energy_services.payloads.NewFatturaRespDTO;
 import Team3_BW.energy_services.entities.Fattura;
 import Team3_BW.energy_services.services.FatturaService;
 import jakarta.validation.ValidationException;
@@ -13,8 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
-@RequestMapping("")
+@RequestMapping("/fatture")
 public class FatturaController {
 
     @Autowired
@@ -27,6 +30,21 @@ public class FatturaController {
                                  @RequestParam(defaultValue = "id") String sortBy
     ) {
         return (Page<Fattura>) this.fatturaService.findAll(page, size, sortBy);
+    }
+
+    @GetMapping("/filtertoclient")
+    public List<Fattura> filterToClient(@RequestParam long id){
+        return fatturaService.filterToCliente(id);
+    }
+
+    @GetMapping("/filtertostato")
+    public List<Fattura> filterToStato(@RequestParam long id){
+        return fatturaService.filterToStato(id);
+    }
+
+    @GetMapping("/filtertodate")
+    public List<Fattura> filterToDate(@RequestParam LocalDate data){
+        return fatturaService.filterToDate(data);
     }
 
 

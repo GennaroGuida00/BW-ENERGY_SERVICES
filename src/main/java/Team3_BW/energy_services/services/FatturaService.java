@@ -1,9 +1,11 @@
 package Team3_BW.energy_services.services;
 
 
-import Team3_BW.energy_services.Payloads.NewFatturaDTO;
+import Team3_BW.energy_services.entities.Cliente;
+import Team3_BW.energy_services.payloads.NewFatturaDTO;
 import Team3_BW.energy_services.entities.Fattura;
 import Team3_BW.energy_services.exceptions.NotFoundException;
+import Team3_BW.energy_services.repositories.ClienteRepository;
 import Team3_BW.energy_services.repositories.FatturaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,18 @@ import org.springframework.data.domain.Sort;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-    @Service
+import java.time.LocalDate;
+import java.util.List;
+
+@Service
     @Slf4j
     public class FatturaService {
 
         @Autowired
         private FatturaRepository fatturaRepository;
+
+        @Autowired
+        private ClienteRepository clienteRepository;
 //        @Autowired
 //        private PasswordEncoder bcrypt;
 
@@ -56,5 +64,20 @@ import org.springframework.stereotype.Service;
 
             return  fatturaRepository.save(found);
         }
+
+        public List<Fattura> filterToCliente(long id){
+            Cliente cliente=clienteRepository.findById(id).orElseThrow(()->new NotFoundException(id));
+            return fatturaRepository.filterToClient(cliente);
+        }
+
+        public List<Fattura> filterToStato(long id){
+            return fatturaRepository.filterToStato(id);
+        }
+
+    public List<Fattura> filterToDate(LocalDate data){
+        return fatturaRepository.filterToDate(data);
+    }
+
+
     }
 

@@ -1,4 +1,4 @@
-package Team3_BW.energy_services.Payloads;
+package Team3_BW.energy_services.payloads;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

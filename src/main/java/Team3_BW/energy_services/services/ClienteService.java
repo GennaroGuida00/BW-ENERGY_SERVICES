@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.services;
 
 
-import Team3_BW.energy_services.Payloads.NewClienteDTO;
+import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.repositories.ClienteRepository;
