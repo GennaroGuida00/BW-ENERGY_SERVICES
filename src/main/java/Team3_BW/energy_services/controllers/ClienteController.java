@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,19 @@ public class ClienteController {
     @GetMapping("/filterfatturato")
     public List<Cliente> findAllFilterFatturato(@RequestParam int fatturato){
         return clienteService.filterToFatturato(fatturato);
+    }
+    @GetMapping("/filterdatainserimento")
+    public List<Cliente> findAllFilterDataInserimento(@RequestParam LocalDate dataInserimento) {
+        return clienteService.filterToDataInserimento(dataInserimento);
+    }
+    @GetMapping("/filterNomeContatto")
+    public List<Cliente> findAllFilterNomeContatto(@RequestParam String nomeContatto) {
+        return clienteService.filterToNomeContatto(nomeContatto);
+    }
 
+    @GetMapping ("/filterDataUltimoContatto")
+    public List<Cliente> findAllFilterDataUltimoContatto(@RequestParam LocalDate DataUltimoContatto) {
+        return clienteService.filterToDataUltimoContatto(DataUltimoContatto);
     }
 
     @PostMapping("/register")

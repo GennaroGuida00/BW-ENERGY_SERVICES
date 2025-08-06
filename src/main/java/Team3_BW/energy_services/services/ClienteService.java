@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -82,8 +83,23 @@ public class ClienteService {
         return clienteRepository.save(found);
     }
 
-    public List<Cliente> filterToFatturato(int fatturatoAnnuale){
-        List<Cliente> clientiFiltrati=clienteRepository.filterToFatturatoAnnuale(fatturatoAnnuale);
+    public List<Cliente> filterToFatturato(int fatturatoAnnuale) {
+        List<Cliente> clientiFiltrati = clienteRepository.filterToFatturatoAnnuale(fatturatoAnnuale);
+        return clientiFiltrati;
+    }
+
+    public List<Cliente> filterToDataInserimento(LocalDate dataInserimento) {
+        List<Cliente> clientiFiltrati = clienteRepository.filterToDataInserimento(dataInserimento);
+        return clientiFiltrati;
+    }
+
+    public List<Cliente> filterToDataUltimoContatto(LocalDate dataUltimoContatto) {
+        List<Cliente> clientiFiltrati = clienteRepository.filterToDataUltimoContatto(dataUltimoContatto);
+        return clientiFiltrati;
+    }
+
+    public List<Cliente> filterToNomeContatto (String nome) {
+        List<Cliente> clientiFiltrati = clienteRepository.filterToNomeContatto(nome);
         return clientiFiltrati;
     }
 
