@@ -30,6 +30,7 @@ public class ComuneService {
                 String nomeProvinciaDaCercare = values[3];
 
                 Provincia provinciaLink = this.provinciaService.findProv(nomeProvinciaDaCercare);
+                System.out.println(provinciaLink);
 
                 if (provinciaLink != null) {
 //                    Comune comune = new Comune();
@@ -39,7 +40,6 @@ public class ComuneService {
 //                    comune.setDenominazioneInItaliano(values[2]);
 //                    comune.setProvinciaRef(provinciaLink);
                     //this.comuneRepo.save(comune);
-                    System.out.println("good");
                 } else {
                     System.out.println("provincia non trovata" + values[3]);
                     this.comuniSenzaProv.add(values[2]);
