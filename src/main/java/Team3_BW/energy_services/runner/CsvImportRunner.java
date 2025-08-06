@@ -20,6 +20,7 @@ public class CsvImportRunner implements CommandLineRunner {
         String provPath = "src/main/resources/comuni&province/province-italiane.csv";
         String comuPath = "src/main/resources/comuni&province/comuni-italiani.csv";
 
+
         try {
             // this.provinciaService.importProvinciaFromCsv(provPath);
             // System.out.println("province imprtate");
