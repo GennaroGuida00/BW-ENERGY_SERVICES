@@ -39,7 +39,7 @@ public class StatoFatturaController {
 
     @GetMapping("/{id}")
     public StatoFatturaDTO getById(@PathVariable long id) {
-        StatoFattura sf = statoFatturaService.findByIdOrThrow(id);
+        StatoFattura sf = statoFatturaService.findById(id);
         return new StatoFatturaDTO(sf.getId(), sf.getNome());
     }
 
