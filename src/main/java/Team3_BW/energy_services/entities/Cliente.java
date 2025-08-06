@@ -23,11 +23,11 @@ public class Cliente {
     private LocalDate dataUltimoContatto;
     private Double fatturatoAnnuale;
     private String pec;
-    private int telefono;
+    private String telefono;
     private String emailContatto;
     private String nomeContatto;
     private String cognomeContatto;
-    private int telefonoContatto;
+    private String telefonoContatto;
     private String logoAziendale;
     @OneToMany(mappedBy = "cliente")
     private List<Fattura> fatture;
@@ -37,7 +37,7 @@ public class Cliente {
 
 
 
-    public Cliente(String ragioneSociale, String partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, Double fatturatoAnnuale, String pec, int telefono, String emailContatto, String nomeContatto, String cognomeContatto, int telefonoContatto, String logoAziendale, List<Fattura> fatture, TipologiaCliente tipologiaCliente) {
+    public Cliente(String ragioneSociale, String partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, Double fatturatoAnnuale, String pec, String telefono, String emailContatto, String nomeContatto, String cognomeContatto, String telefonoContatto, String logoAziendale, List<Fattura> fatture, TipologiaCliente tipologiaCliente) {
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
         this.email = email;
@@ -117,11 +117,11 @@ public class Cliente {
         this.pec = pec;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -149,11 +149,11 @@ public class Cliente {
         this.cognomeContatto = cognomeContatto;
     }
 
-    public int getTelefonoContatto() {
+    public String getTelefonoContatto() {
         return telefonoContatto;
     }
 
-    public void setTelefonoContatto(int telefonoContatto) {
+    public void setTelefonoContatto(String telefonoContatto) {
         this.telefonoContatto = telefonoContatto;
     }
 

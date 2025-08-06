@@ -3,19 +3,19 @@ package Team3_BW.energy_services.exceptions;
 import Team3_BW.energy_services.Payloads.ErrorsDTO;
 import Team3_BW.energy_services.Payloads.ErrorsWithListDTO;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authorization.AuthorizationDeniedException;
+//import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
 
 public class ExceptionsHandler {
-    @ExceptionHandler(ValidationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorsWithListDTO handleValidationErrors(ValidationException ex) {
-
-        return new ErrorsWithListDTO(ex.getMessage(), LocalDateTime.now(), ex.getErrorMessages());
-    }
+//    @ExceptionHandler(ValidationException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ErrorsWithListDTO handleValidationErrors(ValidationException ex) {
+//
+//        return new ErrorsWithListDTO(ex.getMessage(), LocalDateTime.now(), ex.getErrorMessages());
+//    }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST) // 400
@@ -29,11 +29,11 @@ public class ExceptionsHandler {
         return new ErrorsDTO(ex.getMessage(), LocalDateTime.now());
     }
 
-    @ExceptionHandler(AuthorizationDeniedException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN) // 403
-    public ErrorsDTO handleForbidden(AuthorizationDeniedException ex) {
-        return new ErrorsDTO("Non hai i permessi di accedere!", LocalDateTime.now());
-    }
+//    @ExceptionHandler(AuthorizationDeniedException.class)
+//    @ResponseStatus(HttpStatus.FORBIDDEN) // 403
+//    public ErrorsDTO handleForbidden(AuthorizationDeniedException ex) {
+//        return new ErrorsDTO("Non hai i permessi di accedere!", LocalDateTime.now());
+//    }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND) // 404

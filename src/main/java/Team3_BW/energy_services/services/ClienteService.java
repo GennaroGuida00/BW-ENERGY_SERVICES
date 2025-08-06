@@ -11,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -46,7 +48,7 @@ public class ClienteService {
 
     public Page<Cliente> findAll(int pageNumber, int pageSize, String sortBy) {
         if (pageSize > 50) pageSize = 50;
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).descending());
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).ascending());
         return this.clienteRepository.findAll(pageable);
     }
 
@@ -78,6 +80,11 @@ public class ClienteService {
         found.setTipologiaCliente(payload.tipologiaCliente());
 
         return clienteRepository.save(found);
+    }
+
+    public List<Cliente> filterToFatturato(int fatturatoAnnuale){
+        List<Cliente> clientiFiltrati=clienteRepository.filterToFatturatoAnnuale(fatturatoAnnuale);
+        return clientiFiltrati;
     }
 
 }

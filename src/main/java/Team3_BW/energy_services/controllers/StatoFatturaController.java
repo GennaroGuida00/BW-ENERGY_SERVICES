@@ -25,17 +25,17 @@ public class StatoFatturaController {
                 .map(sf -> new StatoFatturaDTO(sf.getId(), sf.getNome()));
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public StatoFatturaDTO save(@RequestBody @Validated StatoFatturaDTO payload, BindingResult validationResult) {
-        if (validationResult.hasErrors()) {
-            throw new ValidationException("Validazione fallita");
-        }
-        StatoFattura newStato = new StatoFattura();
-        newStato.setNome(payload.nome());
-        StatoFattura saved = statoFatturaService.save(newStato);
-        return new StatoFatturaDTO(saved.getId(), saved.getNome());
-    }
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public StatoFatturaDTO save(@RequestBody @Validated StatoFatturaDTO payload, BindingResult validationResult) {
+//        if (validationResult.hasErrors()) {
+//            throw new ValidationException("Validazione fallita");
+//        }
+//        StatoFattura newStato = new StatoFattura();
+//        newStato.setNome(payload.nome());
+//        StatoFattura saved = statoFatturaService.save(newStato);
+//        return new StatoFatturaDTO(saved.getId(), saved.getNome());
+//    }
 
     @GetMapping("/{id}")
     public StatoFatturaDTO getById(@PathVariable long id) {
