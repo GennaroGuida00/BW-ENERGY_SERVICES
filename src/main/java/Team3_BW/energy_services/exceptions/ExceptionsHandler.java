@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.exceptions;
 
-import Team3_BW.energy_services.Payloads.ErrorsDTO;
-import Team3_BW.energy_services.Payloads.ErrorsWithListDTO;
+import Team3_BW.energy_services.payloads.ErrorsDTO;
+import Team3_BW.energy_services.payloads.ErrorsWithListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

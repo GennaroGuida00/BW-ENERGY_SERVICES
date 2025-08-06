@@ -1,8 +1,8 @@
 package Team3_BW.energy_services.controllers;
 
-import Team3_BW.energy_services.Payloads.NewFatturaDTO;
-import Team3_BW.energy_services.Payloads.NewFatturaRespDTO;
 import Team3_BW.energy_services.entities.Fattura;
+import Team3_BW.energy_services.payloads.NewFatturaDTO;
+import Team3_BW.energy_services.payloads.NewFatturaRespDTO;
 import Team3_BW.energy_services.services.FatturaService;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;

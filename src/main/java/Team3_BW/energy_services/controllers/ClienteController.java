@@ -1,8 +1,8 @@
 package Team3_BW.energy_services.controllers;
 
-import Team3_BW.energy_services.Payloads.NewClienteDTO;
-import Team3_BW.energy_services.Payloads.NewClienteRespDTO;
 import Team3_BW.energy_services.entities.Cliente;
+import Team3_BW.energy_services.payloads.NewClienteDTO;
+import Team3_BW.energy_services.payloads.NewClienteRespDTO;
 import Team3_BW.energy_services.services.ClienteService;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;

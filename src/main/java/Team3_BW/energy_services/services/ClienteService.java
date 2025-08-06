@@ -1,9 +1,9 @@
 package Team3_BW.energy_services.services;
 
 
-import Team3_BW.energy_services.Payloads.NewClienteDTO;
 import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.exceptions.NotFoundException;
+import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.repositories.ClienteRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service

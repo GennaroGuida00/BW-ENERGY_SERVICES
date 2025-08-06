@@ -1,6 +1,5 @@
-package Team3_BW.energy_services.Payloads;
+package Team3_BW.energy_services.payloads;
 
-import Team3_BW.energy_services.entities.StatoFattura;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -12,5 +11,5 @@ public record NewFatturaDTO(
         LocalDate data,
         @NotEmpty(message = "obbligatorio!")
         @Size(min = 2, max = 40, message = "Il cognome deve essere di lunghezza compresa tra 2 e 40")
-        double importo)
-{}
+        double importo) {
+}

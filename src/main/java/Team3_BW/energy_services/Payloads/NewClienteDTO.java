@@ -1,4 +1,4 @@
-package Team3_BW.energy_services.Payloads;
+package Team3_BW.energy_services.payloads;
 
 
 import Team3_BW.energy_services.enums.TipologiaCliente;
@@ -50,5 +50,5 @@ public record NewClienteDTO(
         String logoAziendale,
         @NotEmpty(message = "La m è obbligatoria!")
         @Size(min = 4)
-        TipologiaCliente tipologiaCliente)
-{}
+        TipologiaCliente tipologiaCliente) {
+}
