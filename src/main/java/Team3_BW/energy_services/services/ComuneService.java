@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ComuneService {
@@ -17,8 +15,6 @@ public class ComuneService {
 
     @Autowired
     private ProvinciaService provinciaService;
-
-    private List<String> comuniSenzaProv = new ArrayList<>();
 
     public void importComuneFromCsv(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -29,30 +25,30 @@ public class ComuneService {
 
                 String nomeProvinciaDaCercare = values[3];
 
-                Provincia provinciaLink = this.provinciaService.findProv(nomeProvinciaDaCercare);
-                System.out.println(provinciaLink);
+                try {
+                    Provincia provinciaLink = this.provinciaService.findProv(nomeProvinciaDaCercare);
+                    System.out.println(provinciaLink);
+                } catch (RuntimeException ex) {
+                    System.out.println(nomeProvinciaDaCercare);
+                }
 
-                if (provinciaLink != null) {
+
+//                if (provinciaLink != null) {
 //                    Comune comune = new Comune();
 //                    comune.setNomeComune(values[3]);
 //                    comune.setCodiceProvincia(Integer.parseInt(values[0]));
 //                    comune.setProgressivoDelComune(Integer.parseInt(values[1]));
 //                    comune.setDenominazioneInItaliano(values[2]);
 //                    comune.setProvinciaRef(provinciaLink);
-                    //this.comuneRepo.save(comune);
-                } else {
-                    System.out.println("provincia non trovata" + values[3]);
-                    this.comuniSenzaProv.add(values[2]);
-                }
+//                    this.comuneRepo.save(comune);
+//                } else {
+//                    System.out.println("provincia non trovata" + values[3]);
+//                }
             }
 
         } catch (Exception e) {
             throw new RuntimeException("errore nella lettura del file");
         }
-    }
-
-    public List<String> getCSP() {
-        return comuniSenzaProv;
     }
 
 }
