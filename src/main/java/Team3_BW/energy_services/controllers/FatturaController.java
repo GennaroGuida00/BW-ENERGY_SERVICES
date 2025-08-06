@@ -47,6 +47,16 @@ public class FatturaController {
         return fatturaService.filterToDate(data);
     }
 
+    @GetMapping("/filtertoyear")
+    public List<Fattura> filterToYear(@RequestParam int year){
+        return fatturaService.filterToYear(year);
+    }
+
+    @GetMapping("/filtertorangeimport")
+    public List<Fattura> filterToRangeImport(@RequestParam double importoA, @RequestParam double importoB){
+        return fatturaService.filterToRangeImport(importoA,importoB);
+    }
+
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)

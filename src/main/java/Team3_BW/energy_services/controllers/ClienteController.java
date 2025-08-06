@@ -39,15 +39,17 @@ public class ClienteController {
     public List<Cliente> findAllFilterDataInserimento(@RequestParam LocalDate dataInserimento) {
         return clienteService.filterToDataInserimento(dataInserimento);
     }
-    @GetMapping("/filterNomeContatto")
+    @GetMapping("/filternomecontatto")
     public List<Cliente> findAllFilterNomeContatto(@RequestParam String nomeContatto) {
         return clienteService.filterToNomeContatto(nomeContatto);
     }
 
-    @GetMapping ("/filterDataUltimoContatto")
+    @GetMapping ("/filterdataultimocontatto")
     public List<Cliente> findAllFilterDataUltimoContatto(@RequestParam LocalDate dataUltimoContatto) {
         return clienteService.filterToDataUltimoContatto(dataUltimoContatto);
     }
+
+
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)

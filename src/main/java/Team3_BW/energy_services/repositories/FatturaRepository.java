@@ -18,6 +18,15 @@ public interface FatturaRepository extends JpaRepository<Fattura, Long> {
     @Query("SELECT f FROM Fattura f WHERE f.statoFattura.id=:id")
     List<Fattura> filterToStato (@Param("id") long id);
 
-    @Query("SELECT f from Fattura f WHERE f.data<=:data")
+    @Query("SELECT f from Fattura f WHERE f.data=:data")
     List<Fattura> filterToDate(@Param("data")LocalDate data);
+
+    @Query("SELECT f FROM Fattura f WHERE EXTRACT(YEAR FROM f.data) = :year")
+    List<Fattura> findByAnno(@Param("year") int year);
+
+
+    @Query("SELECT f FROM Fattura f WHERE f.importo BETWEEN :importoA AND :importoB")
+    List<Fattura> findByRangeImport (
+            @Param("importoA") double importoA,
+            @Param("importoB") double importoB);
 }
