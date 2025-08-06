@@ -50,8 +50,6 @@ public class ComuneService {
                     Provincia provinciaLink = this.provinciaService.findProv(nomeProvinciaDaCercare);
                     Comune comune = new Comune();
                     comune.setNomeComune(values[3]);
-                    comune.setCodiceProvincia(Integer.parseInt(values[0]));
-                    comune.setProgressivoDelComune(Integer.parseInt(values[1]));
                     comune.setDenominazioneInItaliano(values[2]);
                     comune.setProvinciaRef(provinciaLink);
                     this.comuneRepo.save(comune);
@@ -61,8 +59,6 @@ public class ComuneService {
                     Provincia p = this.provinciaService.findProv(provinciaGiusta);
                     Comune comune = new Comune();
                     comune.setNomeComune(values[3]);
-                    comune.setCodiceProvincia(Integer.parseInt(values[0]));
-                    comune.setProgressivoDelComune(Integer.parseInt(values[1]));
                     comune.setDenominazioneInItaliano(values[2]);
                     comune.setProvinciaRef(p);
                     this.comuneRepo.save(comune);
