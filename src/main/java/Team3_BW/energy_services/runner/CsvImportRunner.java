@@ -24,7 +24,7 @@ public class CsvImportRunner implements CommandLineRunner {
         try {
             // this.provinciaService.importProvinciaFromCsv(provPath);
             // System.out.println("province imprtate");
-            this.comuneService.importComuneFromCsv(comuPath);
+            // this.comuneService.importComuneFromCsv(comuPath);
             System.out.println("done");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
