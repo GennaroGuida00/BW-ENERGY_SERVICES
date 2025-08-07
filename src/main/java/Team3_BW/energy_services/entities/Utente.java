@@ -1,11 +1,10 @@
 package Team3_BW.energy_services.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "utenti")
@@ -33,6 +32,7 @@ public class Utente {
     )
     private List<Ruolo> ruoli = new ArrayList<>();
 
+
     public Utente(String username, String email, String nome, String cognome, String password, String avatar, List<Ruolo> ruoli) {
         this.username = username;
         this.email = email;
@@ -41,8 +41,15 @@ public class Utente {
         this.password = password;
         this.avatar = avatar;
         this.ruoli = ruoli;
+
     }
 
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Questo Metodo deve tornare una lista di ruoli dell'utente. Per essere più precisi vuole che venga restituita una collection di oggetti
+        // che estendono GrantedAuthority. SimpleGrantedAuthority è una classe che rappresenta i ruoli degli utenti nel mondo Spring Security, essa
+        // estende GrantedAuthority. Dobbiamo passare il nostro ruolo (enum), convertito in string al costruttore dell'oggetto
+        return List.of(new SimpleGrantedAuthority(this.ruoli(nome)));
+    }
     public Utente() {
 
     }
