@@ -1,20 +1,18 @@
 package Team3_BW.energy_services.services;
 
 
-import Team3_BW.energy_services.entities.Fattura;
-import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.exceptions.NotFoundException;
+import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.repositories.ClienteRepository;
 import Team3_BW.energy_services.specifications.ClienteSpecification;
-import Team3_BW.energy_services.specifications.FatturaSpecification;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +25,6 @@ public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
-//    @Autowired
-//    private PasswordEncoder bcrypt;
 
     public Cliente save(NewClienteDTO payload) {
 
@@ -51,6 +47,7 @@ public class ClienteService {
         return clienteRepository.save(newCliente);
     }
 
+    @Transactional
     public Page<Cliente> findAll(int pageNumber, int pageSize, String sortBy) {
         if (pageSize > 50) pageSize = 50;
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).ascending());
@@ -88,8 +85,8 @@ public class ClienteService {
     }
 
     public List<Cliente> filterCliente(
-           Integer fatturato,
-           LocalDate dataInserimento,
+            Integer fatturato,
+            LocalDate dataInserimento,
             LocalDate dataUltimoContatto,
             String nome
     ) {
