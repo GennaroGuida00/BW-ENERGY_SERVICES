@@ -26,7 +26,7 @@ public class StatoFatturaController {
         return statoFatturaService.findAll(page, size, sortBy);
     }
 
-    @PostMapping
+    @PostMapping("/salvastatofattura")
     @ResponseStatus(HttpStatus.CREATED)
     public NewStatoFatturaRespDTO save(@RequestBody @Validated NewStatoFatturaDTO payload, BindingResult validationResult) {
         if (validationResult.hasErrors()) {

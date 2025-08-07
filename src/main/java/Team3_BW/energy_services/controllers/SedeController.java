@@ -28,7 +28,7 @@ public class SedeController {
         return sedeService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/salvasede")
     @PreAuthorize("hasAuthority('ADMIN')")
     public Sede createSede(@Valid @RequestBody NewSedeDTO sedeDTO) {
         return sedeService.add(sedeDTO);
