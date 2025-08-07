@@ -2,7 +2,7 @@ package Team3_BW.energy_services.services;
 
 import Team3_BW.energy_services.entities.StatoFattura;
 import Team3_BW.energy_services.exceptions.NotFoundException;
-import Team3_BW.energy_services.payloads.StatoFatturaDTO;
+import Team3_BW.energy_services.payloads.NewStatoFatturaDTO;
 import Team3_BW.energy_services.repositories.StatoFatturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,9 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StatoFatturaService {
@@ -34,12 +31,13 @@ public class StatoFatturaService {
         return statoFatturaRepository.findById(id).orElseThrow(()->new NotFoundException(id));
     }
 
-    public StatoFattura save(StatoFattura statoFattura) {
-
+    public StatoFattura save(NewStatoFatturaDTO statoFatturaDTO) {
+        StatoFattura statoFattura=new StatoFattura();
+        statoFattura.setNome(statoFatturaDTO.nome());
         return statoFatturaRepository.save(statoFattura);
     }
 
-    public StatoFattura findByIdAndUpdate(Long id, StatoFatturaDTO dto) {
+    public StatoFattura findByIdAndUpdate(Long id, NewStatoFatturaDTO dto) {
         StatoFattura stato = findById(id);
         stato.setNome(dto.nome());
         return statoFatturaRepository.save(stato);

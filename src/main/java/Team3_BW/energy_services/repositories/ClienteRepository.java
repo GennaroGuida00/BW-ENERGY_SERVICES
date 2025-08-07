@@ -20,8 +20,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query("SELECT c FROM Cliente c WHERE c.dataUltimoContatto<=:dataUltimoContatto")
     List<Cliente> filterToDataUltimoContatto(@Param("dataUltimoContatto")LocalDate dataUltimoContatto);
 
-    @Query("Select c FROM Cliente c Where c.nomeContatto LIKE%:nomeContatto%")
-    List<Cliente> filterToNomeContatto(@Param("NomeContatto") String NomeContatto);
+    @Query("Select c FROM Cliente c Where c.nomeContatto LIKE CONCAT('%', :nomeContatto, '%')")
+    List<Cliente> filterToNomeContatto(@Param("nomeContatto") String NomeContatto);
 }
 
 

@@ -12,6 +12,7 @@ public class StatoFattura {
     @Column(nullable = false)
     private String nome;
 
+
     public StatoFattura() {
     }
 

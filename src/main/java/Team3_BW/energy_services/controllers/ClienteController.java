@@ -1,7 +1,7 @@
 package Team3_BW.energy_services.controllers;
 
-import Team3_BW.energy_services.Payloads.NewClienteDTO;
-import Team3_BW.energy_services.Payloads.NewClienteRespDTO;
+import Team3_BW.energy_services.payloads.NewClienteDTO;
+import Team3_BW.energy_services.payloads.NewClienteRespDTO;
 import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.services.ClienteService;
 import jakarta.validation.ValidationException;
@@ -39,15 +39,17 @@ public class ClienteController {
     public List<Cliente> findAllFilterDataInserimento(@RequestParam LocalDate dataInserimento) {
         return clienteService.filterToDataInserimento(dataInserimento);
     }
-    @GetMapping("/filterNomeContatto")
+    @GetMapping("/filternomecontatto")
     public List<Cliente> findAllFilterNomeContatto(@RequestParam String nomeContatto) {
         return clienteService.filterToNomeContatto(nomeContatto);
     }
 
-    @GetMapping ("/filterDataUltimoContatto")
-    public List<Cliente> findAllFilterDataUltimoContatto(@RequestParam LocalDate DataUltimoContatto) {
-        return clienteService.filterToDataUltimoContatto(DataUltimoContatto);
+    @GetMapping ("/filterdataultimocontatto")
+    public List<Cliente> findAllFilterDataUltimoContatto(@RequestParam LocalDate dataUltimoContatto) {
+        return clienteService.filterToDataUltimoContatto(dataUltimoContatto);
     }
+
+
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)

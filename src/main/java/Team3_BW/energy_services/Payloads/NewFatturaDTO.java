@@ -1,16 +1,20 @@
-package Team3_BW.energy_services.Payloads;
+package Team3_BW.energy_services.payloads;
 
+import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.entities.StatoFattura;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 
 public record NewFatturaDTO(
 
-        @NotEmpty(message = "obbligatoria!")
+        @PastOrPresent(message = "data non può essere futura")
         LocalDate data,
-        @NotEmpty(message = "obbligatorio!")
-        @Size(min = 2, max = 40, message = "Il cognome deve essere di lunghezza compresa tra 2 e 40")
-        double importo)
+        @Positive(message = "L'importo deve essere positivo")
+        double importo,
+        @NotNull(message = "Il cliente è obbligatorio")
+        long id_cliente,
+        @NotNull(message = "Lo stato della fattura è obbligatorio")
+        long id_statoFattura
+        )
 {}
