@@ -1,5 +1,6 @@
 package Team3_BW.energy_services.controllers;
 
+import Team3_BW.energy_services.entities.Fattura;
 import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.payloads.NewClienteRespDTO;
 import Team3_BW.energy_services.entities.Cliente;
@@ -31,26 +32,15 @@ public class ClienteController {
         return clienteService.findAll(page, size, sortBy);
     }
 
-    @GetMapping("/filterfatturato")
-    public List<Cliente> findAllFilterFatturato(@RequestParam int fatturato){
-        return clienteService.filterToFatturato(fatturato);
+    @GetMapping("/filter")
+    public List<Cliente> filterCliente(
+            @RequestParam(required = false) Integer fatturato,
+            @RequestParam(required = false) LocalDate dataInserimento,
+            @RequestParam(required = false) LocalDate dataUltimoContatto,
+            @RequestParam(required = false) String nome
+    ) {
+        return clienteService.filterCliente(fatturato, dataInserimento, dataUltimoContatto, nome);
     }
-    @GetMapping("/filterdatainserimento")
-    public List<Cliente> findAllFilterDataInserimento(@RequestParam LocalDate dataInserimento) {
-        return clienteService.filterToDataInserimento(dataInserimento);
-    }
-    @GetMapping("/filternomecontatto")
-    public List<Cliente> findAllFilterNomeContatto(@RequestParam String nomeContatto) {
-        return clienteService.filterToNomeContatto(nomeContatto);
-    }
-
-    @GetMapping ("/filterdataultimocontatto")
-    public List<Cliente> findAllFilterDataUltimoContatto(@RequestParam LocalDate dataUltimoContatto) {
-        return clienteService.filterToDataUltimoContatto(dataUltimoContatto);
-    }
-
-
-
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public NewClienteRespDTO save(@RequestBody @Validated NewClienteDTO payload, BindingResult validationResult) {
