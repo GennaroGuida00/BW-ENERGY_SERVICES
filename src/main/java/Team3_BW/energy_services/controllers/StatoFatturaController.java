@@ -8,6 +8,7 @@ import Team3_BW.energy_services.services.StatoFatturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class StatoFatturaController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public StatoFattura getByIdAndUpdate(@PathVariable long id, @RequestBody NewStatoFatturaDTO payload) {
 
         return statoFatturaService.findByIdAndUpdate(id, payload);
@@ -53,6 +55,7 @@ public class StatoFatturaController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void getByIdAndDelete(@PathVariable long id) {
         statoFatturaService.findByIdAndDelete(id);
     }

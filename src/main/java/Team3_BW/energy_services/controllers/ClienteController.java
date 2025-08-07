@@ -8,6 +8,7 @@ import Team3_BW.energy_services.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-//    @PreAuthorize("hasAuthority('')")
     public Page<Cliente> findAll(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "10") int size,
                                  @RequestParam(defaultValue = "id") String sortBy) {
@@ -57,19 +57,18 @@ public class ClienteController {
     }
 
     @GetMapping("/{clienteId}")
-//    @PreAuthorize("hasAuthority('')")
     public Cliente getById(@PathVariable long clienteId) {
         return clienteService.findById(clienteId);
     }
 
     @PutMapping("/{clienteId}")
-//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Cliente getByIdAndUpdate(@PathVariable long clienteId, @RequestBody NewClienteDTO payload) {
         return this.clienteService.findByIdAndUpdate(clienteId, payload);
     }
 
     @DeleteMapping("/{clienteId}")
-//    @PreAuthorize("hasAuthority('')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void getByIdAndDelete(@PathVariable long clienteId) {
         this.clienteService.findByIdAndDelete(clienteId);
