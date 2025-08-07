@@ -27,7 +27,7 @@ public class IndirizziController {
         return indirizzoService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/salvaindirizzo")
     @PreAuthorize("hasAuthority('ADMIN')")
     public Indirizzo createIndirizzo(@Valid @RequestBody NewIndirizzoDTO indirizzoDTO) {
         return indirizzoService.add(indirizzoDTO);
