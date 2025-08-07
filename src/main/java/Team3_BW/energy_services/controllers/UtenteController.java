@@ -1,12 +1,14 @@
 package Team3_BW.energy_services.controllers;
 
 import Team3_BW.energy_services.entities.Utente;
+import Team3_BW.energy_services.exceptions.ValidationException;
 import Team3_BW.energy_services.payloads.UtenteDTO;
 import Team3_BW.energy_services.services.UtenteService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,9 +28,16 @@ public class UtenteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Utente save(@Valid @RequestBody UtenteDTO payload) {
-        return utenteService.save(payload);
-
+    public Utente save(@Validated @RequestBody UtenteDTO payload, BindingResult validationResults) {
+        if (validationResults.hasErrors()) {
+            throw new ValidationException(validationResults.getFieldErrors()
+                    .stream()
+                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .toList()
+            );
+        } else {
+            return utenteService.save(payload);
+        }
     }
 
 

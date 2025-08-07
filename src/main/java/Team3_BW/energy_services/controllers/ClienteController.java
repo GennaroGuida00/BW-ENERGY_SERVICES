@@ -1,15 +1,13 @@
 package Team3_BW.energy_services.controllers;
 
-import Team3_BW.energy_services.entities.Fattura;
+import Team3_BW.energy_services.entities.Cliente;
+import Team3_BW.energy_services.exceptions.ValidationException;
 import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.payloads.NewClienteRespDTO;
-import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.services.ClienteService;
-import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +39,21 @@ public class ClienteController {
     ) {
         return clienteService.filterCliente(fatturato, dataInserimento, dataUltimoContatto, nome);
     }
+
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public NewClienteRespDTO save(@RequestBody @Validated NewClienteDTO payload, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
-            throw new ValidationException("Validazione fallita");
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .toList()
+            );
+        } else {
+            Cliente newCliente = clienteService.save(payload);
+            return new NewClienteRespDTO(newCliente.getId());
         }
-        Cliente newCliente = clienteService.save(payload);
-        return new NewClienteRespDTO(newCliente.getId());
+
     }
 
     @GetMapping("/{clienteId}")
@@ -59,8 +64,8 @@ public class ClienteController {
 
     @PutMapping("/{clienteId}")
 //    @PreAuthorize("hasAuthority('ADMIN')")
-    public Cliente getByIdAndUpdate(@PathVariable long userId, @RequestBody NewClienteDTO payload) {
-        return this.clienteService.findByIdAndUpdate(userId, payload);
+    public Cliente getByIdAndUpdate(@PathVariable long clienteId, @RequestBody NewClienteDTO payload) {
+        return this.clienteService.findByIdAndUpdate(clienteId, payload);
     }
 
     @DeleteMapping("/{clienteId}")

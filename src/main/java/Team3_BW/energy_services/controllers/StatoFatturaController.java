@@ -1,9 +1,9 @@
 package Team3_BW.energy_services.controllers;
 
 import Team3_BW.energy_services.entities.StatoFattura;
-import jakarta.validation.ValidationException;
-import Team3_BW.energy_services.payloads.NewStatoFatturaRespDTO;
+import Team3_BW.energy_services.exceptions.ValidationException;
 import Team3_BW.energy_services.payloads.NewStatoFatturaDTO;
+import Team3_BW.energy_services.payloads.NewStatoFatturaRespDTO;
 import Team3_BW.energy_services.services.StatoFatturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,8 +20,8 @@ public class StatoFatturaController {
 
     @GetMapping
     public Page<StatoFattura> findAll(@RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "20") int size,
-                                         @RequestParam(defaultValue = "id") String sortBy) {
+                                      @RequestParam(defaultValue = "20") int size,
+                                      @RequestParam(defaultValue = "id") String sortBy) {
         return statoFatturaService.findAll(page, size, sortBy);
     }
 
@@ -29,9 +29,14 @@ public class StatoFatturaController {
     @ResponseStatus(HttpStatus.CREATED)
     public NewStatoFatturaRespDTO save(@RequestBody @Validated NewStatoFatturaDTO payload, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
-            throw new ValidationException("Validazione fallita");
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(fieldError -> fieldError.getDefaultMessage())
+                    .toList()
+            );
         }
-        StatoFattura newStato = statoFatturaService.save(payload);;
+        StatoFattura newStato = statoFatturaService.save(payload);
+        ;
         return new NewStatoFatturaRespDTO(newStato.getId());
     }
 
