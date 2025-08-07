@@ -1,11 +1,11 @@
 package Team3_BW.energy_services.services;
 
+import Team3_BW.energy_services.entities.Ruolo;
 import Team3_BW.energy_services.entities.Utente;
 import Team3_BW.energy_services.exceptions.BadRequestException;
 import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.payloads.UtenteDTO;
 import Team3_BW.energy_services.repositories.UtenteRepository;
-import io.jsonwebtoken.security.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UtenteService {
@@ -24,12 +24,15 @@ public class UtenteService {
     @Autowired
     private PasswordEncoder bcrypt;
 
+    @Autowired
+    private RuoloService ruoloService;
+
     public List<Utente> findAll() {
         return utenteRepository.findAll();
     }
 
     public Utente findById(Long id) {
-        return utenteRepository.findById(id).orElseThrow(()->new NotFoundException(id));
+        return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     public Page<Utente> findAll(int page, int size, String sortBy) {
@@ -45,6 +48,10 @@ public class UtenteService {
         this.utenteRepository.findByEmail(dto.email()).ifPresent(user -> {
             throw new BadRequestException("L'email " + user.getEmail() + " è già in uso!");
         });
+        List<Ruolo> ruoloList = new ArrayList<>();
+        Ruolo rFromDb = ruoloService.findById(Long.parseLong("1"));
+        ruoloList.add(rFromDb);
+
         Utente utente = new Utente();
         utente.setUsername(dto.username());
         utente.setEmail(dto.email());
@@ -52,6 +59,7 @@ public class UtenteService {
         utente.setCognome(dto.cognome());
         utente.setAvatar(dto.avatar());
         utente.setPassword(bcrypt.encode(dto.password()));
+        utente.setRuoli(ruoloList);
         return utenteRepository.save(utente);
     }
 
