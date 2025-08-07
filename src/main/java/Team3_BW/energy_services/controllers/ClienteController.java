@@ -35,9 +35,12 @@ public class ClienteController {
             @RequestParam(required = false) Integer fatturato,
             @RequestParam(required = false) LocalDate dataInserimento,
             @RequestParam(required = false) LocalDate dataUltimoContatto,
-            @RequestParam(required = false) String nome
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String provincia,
+            @RequestParam(required = false) String tipoSede
+
     ) {
-        return clienteService.filterCliente(fatturato, dataInserimento, dataUltimoContatto, nome);
+        return clienteService.filterCliente(fatturato, dataInserimento, dataUltimoContatto, nome,provincia,tipoSede);
     }
 
     @PostMapping("/register")

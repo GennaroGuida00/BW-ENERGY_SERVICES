@@ -1,7 +1,10 @@
 package Team3_BW.energy_services.specifications;
 
+import Team3_BW.energy_services.entities.*;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import Team3_BW.energy_services.entities.Cliente;
 
 
 import java.time.LocalDate;
@@ -28,5 +31,25 @@ public class ClienteSpecification {
                 nome == null || nome.isBlank()
                         ? null
                         : cb.like(cb.lower(root.get("nomeContatto")), nome.toLowerCase() + "%");
+    }
+
+    public static Specification<Cliente> hasProvinciaAndTipoSede(String provincia, String tipoSede) {
+        return (root, query, cb) -> {
+            // JOIN con sedi
+            Join<Cliente, Sede> sedeJoin = root.join("sedi", JoinType.INNER);
+
+            Predicate tipoSedePredicate = tipoSede == null ? cb.conjunction() :
+                    cb.equal(sedeJoin.get("tipoSede"), tipoSede);
+
+            Join<Sede, Indirizzo> indirizzoJoin = sedeJoin.join("indirizzo", JoinType.INNER);
+            Join<Indirizzo, Comune> comuneJoin = indirizzoJoin.join("comune", JoinType.INNER);
+            Join<Comune, Provincia> provinciaJoin = comuneJoin.join("provincia", JoinType.INNER);
+
+            Predicate provinciaPredicate = provincia == null ? cb.conjunction() :
+                    cb.equal(cb.lower(provinciaJoin.get("nome")), provincia.toLowerCase());
+
+            // Entrambe le condizioni
+            return cb.and(tipoSedePredicate, provinciaPredicate);
+        };
     }
 }

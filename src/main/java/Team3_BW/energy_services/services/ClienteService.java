@@ -88,13 +88,16 @@ public class ClienteService {
             Integer fatturato,
             LocalDate dataInserimento,
             LocalDate dataUltimoContatto,
-            String nome
+            String nome,
+           String provincia,
+           String tipoSede
     ) {
         Specification<Cliente> spec =
                 ClienteSpecification.fatturatoAnnualeMinoreUguale(fatturato)
                         .and(ClienteSpecification.dataInserimentoPrimaDi(dataInserimento))
                         .and(ClienteSpecification.dataUltimoContattoPrimaDi(dataUltimoContatto))
-                        .and(ClienteSpecification.nomeContattoContiene(nome));
+                        .and(ClienteSpecification.nomeContattoContiene(nome))
+                        .and(ClienteSpecification.hasProvinciaAndTipoSede(provincia, tipoSede));
 
         return clienteRepository.findAll(spec);
     }

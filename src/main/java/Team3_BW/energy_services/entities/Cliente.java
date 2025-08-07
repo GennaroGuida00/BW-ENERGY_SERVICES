@@ -33,27 +33,28 @@ public class Cliente {
     private List<Fattura> fatture;
     @Enumerated(EnumType.STRING)
     private TipologiaCliente tipologiaCliente;
+    @OneToMany(mappedBy = "cliente")
+    private List<Sede> sedi;
 
-
-
-
-    public Cliente(String ragioneSociale, String partitaIva, String email, LocalDate dataInserimento, LocalDate dataUltimoContatto, Double fatturatoAnnuale, String pec, String telefono, String emailContatto, String nomeContatto, String cognomeContatto, String telefonoContatto, String logoAziendale, List<Fattura> fatture, TipologiaCliente tipologiaCliente) {
+    public Cliente(String ragioneSociale, String partitaIva, String email, LocalDate dataInserimento, Double fatturatoAnnuale, LocalDate dataUltimoContatto, String pec, String telefono, String nomeContatto, String emailContatto, String cognomeContatto, String telefonoContatto, String logoAziendale, List<Fattura> fatture, TipologiaCliente tipologiaCliente, List<Sede> sedi) {
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
         this.email = email;
         this.dataInserimento = dataInserimento;
-        this.dataUltimoContatto = dataUltimoContatto;
         this.fatturatoAnnuale = fatturatoAnnuale;
+        this.dataUltimoContatto = dataUltimoContatto;
         this.pec = pec;
         this.telefono = telefono;
-        this.emailContatto = emailContatto;
         this.nomeContatto = nomeContatto;
+        this.emailContatto = emailContatto;
         this.cognomeContatto = cognomeContatto;
         this.telefonoContatto = telefonoContatto;
         this.logoAziendale = logoAziendale;
         this.fatture = fatture;
         this.tipologiaCliente = tipologiaCliente;
+        this.sedi = sedi;
     }
+
     public Cliente() {
     }
 
@@ -179,6 +180,14 @@ public class Cliente {
 
     public void setTipologiaCliente(TipologiaCliente tipologiaCliente) {
         this.tipologiaCliente = tipologiaCliente;
+    }
+
+    public List<Sede> getSedi() {
+        return sedi;
+    }
+
+    public void setSedi(List<Sede> sedi) {
+        this.sedi = sedi;
     }
 
     @Override
