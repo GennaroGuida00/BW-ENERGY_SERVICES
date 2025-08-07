@@ -1,6 +1,7 @@
 package Team3_BW.energy_services.entities;
 
 import Team3_BW.energy_services.enums.TipoSede;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class Sede {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
+    @JsonIgnore
     private Cliente cliente;
 
     public Sede() {
