@@ -8,6 +8,7 @@ import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.repositories.ClienteRepository;
 import Team3_BW.energy_services.repositories.FatturaRepository;
 import Team3_BW.energy_services.repositories.StatoFatturaRepository;
+import Team3_BW.energy_services.specifications.FatturaSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -72,27 +74,25 @@ import java.util.List;
             return  fatturaRepository.save(found);
         }
 
-        public List<Fattura> filterToCliente(long id){
-            Cliente cliente=clienteRepository.findById(id).orElseThrow(()->new NotFoundException(id));
-            return fatturaRepository.filterToClient(cliente);
-        }
+public List<Fattura> filterFatture(
+        Long clienteId,
+        Long statoId,
+        LocalDate data,
+        Integer anno,
+        Double importoMin,
+        Double importoMax
+) {
+    Specification<Fattura> spec =
+            FatturaSpecification.hasCliente(clienteId)
+            .and(FatturaSpecification.hasStatoFattura(statoId))
+            .and(FatturaSpecification.hasData(data))
+            .and(FatturaSpecification.hasAnno(anno))
+            .and(FatturaSpecification.hasImportoBetween(importoMin, importoMax));
 
-        public List<Fattura> filterToStato(long id){
-            return fatturaRepository.filterToStato(id);
-        }
-
-    public List<Fattura> filterToDate(LocalDate data){
-        return fatturaRepository.filterToDate(data);
-    }
-
-    public List<Fattura> filterToYear(int year){
-        return fatturaRepository.findByAnno(year);
-    }
-
-    public List<Fattura> filterToRangeImport(double importoA,double importoB){
-        return fatturaRepository.findByRangeImport(importoA,importoB);
-    }
+    return fatturaRepository.findAll(spec);
+}
 
 
-    }
+
+}
 

@@ -1,10 +1,13 @@
 package Team3_BW.energy_services.services;
 
 
+import Team3_BW.energy_services.entities.Fattura;
 import Team3_BW.energy_services.payloads.NewClienteDTO;
 import Team3_BW.energy_services.entities.Cliente;
 import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.repositories.ClienteRepository;
+import Team3_BW.energy_services.specifications.ClienteSpecification;
+import Team3_BW.energy_services.specifications.FatturaSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -83,24 +87,20 @@ public class ClienteService {
         return clienteRepository.save(found);
     }
 
-    public List<Cliente> filterToFatturato(int fatturatoAnnuale) {
-        List<Cliente> clientiFiltrati = clienteRepository.filterToFatturatoAnnuale(fatturatoAnnuale);
-        return clientiFiltrati;
+    public List<Cliente> filterCliente(
+           Integer fatturato,
+           LocalDate dataInserimento,
+            LocalDate dataUltimoContatto,
+            String nome
+    ) {
+        Specification<Cliente> spec =
+                ClienteSpecification.fatturatoAnnualeMinoreUguale(fatturato)
+                        .and(ClienteSpecification.dataInserimentoPrimaDi(dataInserimento))
+                        .and(ClienteSpecification.dataUltimoContattoPrimaDi(dataUltimoContatto))
+                        .and(ClienteSpecification.nomeContattoContiene(nome));
+
+        return clienteRepository.findAll(spec);
     }
 
-    public List<Cliente> filterToDataInserimento(LocalDate dataInserimento) {
-        List<Cliente> clientiFiltrati = clienteRepository.filterToDataInserimento(dataInserimento);
-        return clientiFiltrati;
-    }
-
-    public List<Cliente> filterToDataUltimoContatto(LocalDate dataUltimoContatto) {
-        List<Cliente> clientiFiltrati = clienteRepository.filterToDataUltimoContatto(dataUltimoContatto);
-        return clientiFiltrati;
-    }
-
-    public List<Cliente> filterToNomeContatto (String nome) {
-        List<Cliente> clientiFiltrati = clienteRepository.filterToNomeContatto(nome);
-        return clientiFiltrati;
-    }
 
 }

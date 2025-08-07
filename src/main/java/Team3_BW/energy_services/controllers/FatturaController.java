@@ -31,30 +31,17 @@ public class FatturaController {
     ) {
         return (Page<Fattura>) this.fatturaService.findAll(page, size, sortBy);
     }
-
-    @GetMapping("/filtertoclient")
-    public List<Fattura> filterToClient(@RequestParam long id){
-        return fatturaService.filterToCliente(id);
-    }
-
-    @GetMapping("/filtertostato")
-    public List<Fattura> filterToStato(@RequestParam long id){
-        return fatturaService.filterToStato(id);
-    }
-
-    @GetMapping("/filtertodate")
-    public List<Fattura> filterToDate(@RequestParam LocalDate data){
-        return fatturaService.filterToDate(data);
-    }
-
-    @GetMapping("/filtertoyear")
-    public List<Fattura> filterToYear(@RequestParam int year){
-        return fatturaService.filterToYear(year);
-    }
-
-    @GetMapping("/filtertorangeimport")
-    public List<Fattura> filterToRangeImport(@RequestParam double importoA, @RequestParam double importoB){
-        return fatturaService.filterToRangeImport(importoA,importoB);
+    
+    @GetMapping("/filter")
+    public List<Fattura> filterFatture(
+            @RequestParam(required = false) Long clienteId,
+            @RequestParam(required = false) Long statoId,
+            @RequestParam(required = false) LocalDate data,
+            @RequestParam(required = false) Integer anno,
+            @RequestParam(required = false) Double importoMin,
+            @RequestParam(required = false) Double importoMax
+    ) {
+        return fatturaService.filterFatture(clienteId, statoId, data, anno, importoMin, importoMax);
     }
 
 
