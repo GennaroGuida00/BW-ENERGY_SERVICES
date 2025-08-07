@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,7 +27,7 @@ public class UtenteController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Utente save(@Valid @RequestBody UtenteDTO payload) {
-        return utenteService.add(payload);
+        return utenteService.save(payload);
 
     }
 
