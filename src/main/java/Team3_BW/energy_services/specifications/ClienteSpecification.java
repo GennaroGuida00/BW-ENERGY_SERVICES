@@ -42,8 +42,8 @@ public class ClienteSpecification {
                     cb.equal(sedeJoin.get("tipoSede"), tipoSede);
 
             Join<Sede, Indirizzo> indirizzoJoin = sedeJoin.join("indirizzo", JoinType.INNER);
-            Join<Indirizzo, Comune> comuneJoin = indirizzoJoin.join("comune", JoinType.INNER);
-            Join<Comune, Provincia> provinciaJoin = comuneJoin.join("provincia", JoinType.INNER);
+            Join<Indirizzo, Comune> comuneJoin = indirizzoJoin.join("nome_comune", JoinType.INNER);
+            Join<Comune, Provincia> provinciaJoin = comuneJoin.join("nomeComune", JoinType.INNER);
 
             Predicate provinciaPredicate = provincia == null ? cb.conjunction() :
                     cb.equal(cb.lower(provinciaJoin.get("nome")), provincia.toLowerCase());

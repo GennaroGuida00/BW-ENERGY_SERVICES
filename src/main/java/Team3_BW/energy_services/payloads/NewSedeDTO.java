@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record NewSedeDTO(
         @NotNull(message = "La sede deve essere obbligatoria.Scegliere tra: LEGALE,OPERATIVA")
-        TipoSede tipoSede,
+        TipoSede type,
         @NotNull(message = "L'indirizzo è obbligatorio")
         long idIndirizzo,
         @NotNull(message = "il cliente è obbligatorio")
