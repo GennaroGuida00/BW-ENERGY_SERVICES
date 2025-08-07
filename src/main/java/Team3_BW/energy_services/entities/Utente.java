@@ -47,13 +47,6 @@ public class Utente {
 
     }
 
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        // Questo Metodo deve tornare una lista di ruoli dell'utente. Per essere più precisi vuole che venga restituita una collection di oggetti
-//        // che estendono GrantedAuthority. SimpleGrantedAuthority è una classe che rappresenta i ruoli degli utenti nel mondo Spring Security, essa
-//        // estende GrantedAuthority. Dobbiamo passare il nostro ruolo (enum), convertito in string al costruttore dell'oggetto
-//        return List.of(new SimpleGrantedAuthority(this.ruoli(nome)));
-//    }
-
     public Utente() {
 
     }
