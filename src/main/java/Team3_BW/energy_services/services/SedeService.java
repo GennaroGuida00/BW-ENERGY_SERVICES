@@ -1,7 +1,6 @@
 package Team3_BW.energy_services.services;
 
 import Team3_BW.energy_services.entities.Sede;
-import Team3_BW.energy_services.enums.TipoSede;
 import Team3_BW.energy_services.exceptions.NotFoundException;
 import Team3_BW.energy_services.payloads.NewSedeDTO;
 import Team3_BW.energy_services.repositories.SedeRepository;
@@ -15,6 +14,11 @@ public class SedeService {
 
     @Autowired
     SedeRepository sedeRepository;
+
+    @Autowired
+    private IndirizzoService  indirizzoService;
+    @Autowired
+    private ClienteService clienteService;
 
     public Sede findById(long id){
         return sedeRepository.findById(id).orElseThrow(()->new NotFoundException(id));
@@ -30,8 +34,9 @@ public class SedeService {
 
     public Sede add(NewSedeDTO sedeDTO){
         Sede sede=new Sede();
-        sede.setType(TipoSede.valueOf(sedeDTO.tipoSede()));
+        sede.setType(sedeDTO.tipoSede());
+        sede.setIndirizzo(indirizzoService.findById(sedeDTO.idIndirizzo()));
+        sede.setCliente(clienteService.findById(sedeDTO.idCliente()));
        return sedeRepository.save(sede);
-
     }
 }
