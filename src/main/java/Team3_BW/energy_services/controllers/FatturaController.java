@@ -44,7 +44,7 @@ public class FatturaController {
     }
 
 
-    @PostMapping()
+    @PostMapping("/salvafatture")
     @ResponseStatus(HttpStatus.CREATED)
     public NewFatturaRespDTO save(@RequestBody @Validated NewFatturaDTO payload, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
