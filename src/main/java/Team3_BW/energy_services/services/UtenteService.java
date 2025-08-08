@@ -59,8 +59,8 @@ public class UtenteService {
         List<Ruolo> ruoloList = new ArrayList<>();
         Ruolo rFromDb = ruoloService.findById(Long.parseLong("1"));
         ruoloList.add(rFromDb);
-        Ruolo adminFromDb = ruoloService.findById(Long.parseLong("2"));
-        ruoloList.add(adminFromDb);
+//        Ruolo adminFromDb = ruoloService.findById(Long.parseLong("2"));
+//        ruoloList.add(adminFromDb);
 
         Utente utente = new Utente();
         utente.setUsername(dto.username());
