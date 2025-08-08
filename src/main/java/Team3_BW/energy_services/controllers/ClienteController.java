@@ -7,6 +7,9 @@ import Team3_BW.energy_services.payloads.NewClienteRespDTO;
 import Team3_BW.energy_services.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -27,7 +30,18 @@ public class ClienteController {
     public Page<Cliente> findAll(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "10") int size,
                                  @RequestParam(defaultValue = "id") String sortBy) {
-        return clienteService.findAll(page, size, sortBy);
+        Sort sort = Sort.by(
+                Sort.Order.asc("sedi.indirizzo.comune.provincia.nome"),
+                Sort.Order.asc("sedi.tipoSede")
+        );
+
+        if (!sortBy.equalsIgnoreCase("provincia") && !sortBy.equalsIgnoreCase("tipoSede")) {
+            sort = sort.and(Sort.by(sortBy));
+        }
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return clienteService.findAll(pageable);
     }
 
     @GetMapping("/filter")
@@ -35,12 +49,11 @@ public class ClienteController {
             @RequestParam(required = false) Integer fatturato,
             @RequestParam(required = false) LocalDate dataInserimento,
             @RequestParam(required = false) LocalDate dataUltimoContatto,
-            @RequestParam(required = false) String nome,
-            @RequestParam(required = false) String provincia,
-            @RequestParam(required = false) String tipoSede
+            @RequestParam(required = false) String nome
+
 
     ) {
-        return clienteService.filterCliente(fatturato, dataInserimento, dataUltimoContatto, nome,provincia,tipoSede);
+        return clienteService.filterCliente(fatturato, dataInserimento, dataUltimoContatto,nome);
     }
 
     @PostMapping("/register")

@@ -47,11 +47,8 @@ public class ClienteService {
         return clienteRepository.save(newCliente);
     }
 
-    @Transactional
-    public Page<Cliente> findAll(int pageNumber, int pageSize, String sortBy) {
-        if (pageSize > 50) pageSize = 50;
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).ascending());
-        return this.clienteRepository.findAll(pageable);
+    public Page<Cliente> findAll(Pageable pageable) {
+        return clienteRepository.findAll(pageable);
     }
 
     public Cliente findById(long Id) {
@@ -88,16 +85,14 @@ public class ClienteService {
             Integer fatturato,
             LocalDate dataInserimento,
             LocalDate dataUltimoContatto,
-            String nome,
-           String provincia,
-           String tipoSede
+            String nome
+
     ) {
         Specification<Cliente> spec =
                 ClienteSpecification.fatturatoAnnualeMinoreUguale(fatturato)
                         .and(ClienteSpecification.dataInserimentoPrimaDi(dataInserimento))
                         .and(ClienteSpecification.dataUltimoContattoPrimaDi(dataUltimoContatto))
-                        .and(ClienteSpecification.nomeContattoContiene(nome))
-                        .and(ClienteSpecification.hasProvinciaAndTipoSede(provincia, tipoSede));
+                        .and(ClienteSpecification.nomeContattoContiene(nome));
 
         return clienteRepository.findAll(spec);
     }

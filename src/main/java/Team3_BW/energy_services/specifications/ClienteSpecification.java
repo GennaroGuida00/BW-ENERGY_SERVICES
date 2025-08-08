@@ -33,23 +33,20 @@ public class ClienteSpecification {
                         : cb.like(cb.lower(root.get("nomeContatto")), nome.toLowerCase() + "%");
     }
 
-    public static Specification<Cliente> hasProvinciaAndTipoSede(String provincia, String tipoSede) {
+    public static Specification<Cliente> hasProvinciaAndTipoSede() {
         return (root, query, cb) -> {
-            // JOIN con sedi
+
             Join<Cliente, Sede> sedeJoin = root.join("sedi", JoinType.INNER);
-
-            Predicate tipoSedePredicate = tipoSede == null ? cb.conjunction() :
-                    cb.equal(sedeJoin.get("tipoSede"), tipoSede);
-
             Join<Sede, Indirizzo> indirizzoJoin = sedeJoin.join("indirizzo", JoinType.INNER);
             Join<Indirizzo, Comune> comuneJoin = indirizzoJoin.join("nome_comune", JoinType.INNER);
             Join<Comune, Provincia> provinciaJoin = comuneJoin.join("nomeComune", JoinType.INNER);
 
-            Predicate provinciaPredicate = provincia == null ? cb.conjunction() :
-                    cb.equal(cb.lower(provinciaJoin.get("nome")), provincia.toLowerCase());
+            query.orderBy(
+                    cb.asc(provinciaJoin.get("nome")),
+                    cb.asc(sedeJoin.get("tipoSede"))
+            );
 
-            // Entrambe le condizioni
-            return cb.and(tipoSedePredicate, provinciaPredicate);
+            return cb.conjunction();
         };
     }
 }
