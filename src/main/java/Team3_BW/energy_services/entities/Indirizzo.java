@@ -1,5 +1,6 @@
 package Team3_BW.energy_services.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Indirizzo {
     private String località;
     private String cap;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "comune_id")
     private Comune nome_comune;
 

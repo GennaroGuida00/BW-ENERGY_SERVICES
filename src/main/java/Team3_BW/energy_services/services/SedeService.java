@@ -34,7 +34,7 @@ public class SedeService {
 
     public Sede add(NewSedeDTO sedeDTO){
         Sede sede=new Sede();
-        sede.setType(sedeDTO.type());
+        sede.setType(sedeDTO.tipoSede());
         sede.setIndirizzo(indirizzoService.findById(sedeDTO.idIndirizzo()));
         sede.setCliente(clienteService.findById(sedeDTO.idCliente()));
        return sedeRepository.save(sede);

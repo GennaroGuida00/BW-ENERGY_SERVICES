@@ -47,8 +47,15 @@ public class ClienteService {
         return clienteRepository.save(newCliente);
     }
 
-    public Page<Cliente> findAll(Pageable pageable) {
-        return clienteRepository.findAll(pageable);
+    @Transactional
+    public Page<Cliente> findAll(int pageNumber, int pageSize, String sortBy) {
+        if (pageSize > 50) pageSize = 50;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).ascending());
+        return this.clienteRepository.findAll(pageable);
+    }
+
+    public List<Cliente> findAllOrderByProvinciaAndTipoSede() {
+        return clienteRepository.findAllOrderByProvinciaAndTipoSede();
     }
 
     public Cliente findById(long Id) {

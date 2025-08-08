@@ -1,6 +1,7 @@
 package Team3_BW.energy_services.entities;
 
 import Team3_BW.energy_services.enums.TipologiaCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Cliente {
     private String telefonoContatto;
     private String logoAziendale;
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Fattura> fatture;
     @Enumerated(EnumType.STRING)
     private TipologiaCliente tipologiaCliente;

@@ -12,10 +12,11 @@ public class Sede {
     private long id;
 
     @Enumerated(EnumType.STRING)
-    private TipoSede type;
+    private TipoSede tipoSede;
 
     @OneToOne
     @JoinColumn(name = "id_address")
+    @JsonIgnore
     private Indirizzo indirizzo;
 
     @ManyToOne
@@ -26,8 +27,8 @@ public class Sede {
     public Sede() {
     }
 
-    public Sede(TipoSede type, Indirizzo indirizzo, Cliente cliente) {
-        this.type = type;
+    public Sede(TipoSede tipoSede, Indirizzo indirizzo, Cliente cliente) {
+        this.tipoSede = tipoSede;
         this.indirizzo = indirizzo;
         this.cliente = cliente;
     }
@@ -37,11 +38,11 @@ public class Sede {
     }
 
     public TipoSede getType() {
-        return type;
+        return tipoSede;
     }
 
-    public void setType(TipoSede type) {
-        this.type = type;
+    public void setType(TipoSede tipoSede) {
+        this.tipoSede = tipoSede;
     }
 
     public Indirizzo getIndirizzo() {
@@ -64,7 +65,7 @@ public class Sede {
     public String toString() {
         return "Sede{" +
                 "id=" + id +
-                ", type=" + type +
+                ", type=" + tipoSede +
                 ", indirizzo=" + indirizzo +
                 ", cliente=" + cliente +
                 '}';
