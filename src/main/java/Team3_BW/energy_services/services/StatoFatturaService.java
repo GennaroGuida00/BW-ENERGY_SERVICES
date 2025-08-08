@@ -16,10 +16,6 @@ public class StatoFatturaService {
     @Autowired
     private StatoFatturaRepository statoFatturaRepository;
 
-//    public List<StatoFattura> findAll() {
-//
-//        return statoFatturaRepository.findAll();
-//    }
 
     public Page<StatoFattura> findAll(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
@@ -28,11 +24,11 @@ public class StatoFatturaService {
 
     public StatoFattura findById(Long id) {
 
-        return statoFatturaRepository.findById(id).orElseThrow(()->new NotFoundException(id));
+        return statoFatturaRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
     public StatoFattura save(NewStatoFatturaDTO statoFatturaDTO) {
-        StatoFattura statoFattura=new StatoFattura();
+        StatoFattura statoFattura = new StatoFattura();
         statoFattura.setNome(statoFatturaDTO.nome());
         return statoFatturaRepository.save(statoFattura);
     }
