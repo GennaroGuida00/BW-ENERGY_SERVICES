@@ -55,6 +55,12 @@ public class UtenteController {
         return utenteService.findByIdAndUpdate(utenteId, payload);
     }
 
+    @PutMapping("/cambioruolo/{utenteId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Utente addRuolo(@PathVariable long utenteId) {
+        return utenteService.findByIdAndUpdateRuolo(utenteId);
+    }
+
     @DeleteMapping("/{utenteId}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)

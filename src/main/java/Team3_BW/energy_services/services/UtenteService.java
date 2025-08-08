@@ -27,6 +27,14 @@ public class UtenteService {
     @Autowired
     private RuoloService ruoloService;
 
+    public Utente findByIdAndUpdateRuolo(Long utenteId) {
+        Utente u = findById(utenteId);
+        Ruolo adminFromDb = ruoloService.findById(Long.parseLong("2"));
+        u.getRuoli().add(adminFromDb);
+        utenteRepository.save(u);
+        return u;
+    }
+
     public List<Utente> findAll() {
         return utenteRepository.findAll();
     }
@@ -51,6 +59,8 @@ public class UtenteService {
         List<Ruolo> ruoloList = new ArrayList<>();
         Ruolo rFromDb = ruoloService.findById(Long.parseLong("1"));
         ruoloList.add(rFromDb);
+//        Ruolo adminFromDb = ruoloService.findById(Long.parseLong("2"));
+//        ruoloList.add(adminFromDb);
 
         Utente utente = new Utente();
         utente.setUsername(dto.username());
@@ -62,7 +72,6 @@ public class UtenteService {
         utente.setRuoli(ruoloList);
         return utenteRepository.save(utente);
     }
-
 
     public Utente findByIdAndUpdate(long id, UtenteDTO dto) {
         Utente found = utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
