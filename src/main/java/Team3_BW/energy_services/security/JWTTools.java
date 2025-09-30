@@ -11,16 +11,18 @@ import java.util.Date;
 
 @Component
 public class JWTTools {
+
+//    la classe JWTTools utilizza due metodi: uno per creare e uno per verificare il token
     @Value("${jwt.secret}")
     private String secret;
 
     public String createToken(Utente utente) {
         return Jwts.builder()
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
-                .subject(String.valueOf(utente.getId()))
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
-                .compact();
+                .issuedAt(new Date(System.currentTimeMillis()))//data di emissione
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))//data di scadenza
+                .subject(String.valueOf(utente.getId()))//Subject, oggetto a cui specifichiamo a chi appartiene il token
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))// Firmo il token tramite un algoritmo specifico che si chiama HMAC, passandogli il segreto
+                .compact();// Assemblo il tutto ottenendo la stringa finale che sarà il token!
     }
 
     public void verifyToken(String token) {

@@ -35,10 +35,6 @@ public class UtenteService {
         return u;
     }
 
-    public List<Utente> findAll() {
-        return utenteRepository.findAll();
-    }
-
     public Utente findById(Long id) {
         return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
@@ -46,10 +42,6 @@ public class UtenteService {
     public Page<Utente> findAll(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return utenteRepository.findAll(pageable);
-    }
-
-    public Utente findByIdOrThrow(Long id) {
-        return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException("Utente non trovato"));
     }
 
     public Utente save(UtenteDTO dto) {
@@ -92,12 +84,8 @@ public class UtenteService {
     }
 
     public void findByIdAndDelete(Long id) {
-        Utente utente = findByIdOrThrow(id);
+        Utente utente = findById(id);
         utenteRepository.delete(utente);
-    }
-
-    public void deleteById(Long id) {
-        utenteRepository.deleteById(id);
     }
 
     public Utente findByEmail(String email) {

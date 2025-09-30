@@ -59,7 +59,7 @@ public class ClienteService {
     }
 
     public Cliente findById(long Id) {
-        return this.clienteRepository.findById(Id).orElseThrow(() -> new NotFoundException(Id));
+        return clienteRepository.findById(Id).orElseThrow(() -> new NotFoundException(Id));
     }
 
     public void findByIdAndDelete(long clienteId) {

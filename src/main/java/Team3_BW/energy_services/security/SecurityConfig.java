@@ -18,16 +18,22 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableMethodSecurity
-@EnableWebSecurity
+@EnableMethodSecurity// serve per impostare AUTORIZZAZIONE sui singoli endpoint tramite @PreAuthorize!!
+@EnableWebSecurity// Annotazione che serve per stabilire che questa sarà una classe di configurazione per configurare Spring Security
 
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.formLogin(f -> f.disable());
-        httpSecurity.csrf(c -> c.disable());
+        // Per poter sovrascrivere i comportamenti di default di Spring Security devo utilizzare questo Bean, il quale mi consentirà di:
+        // - disabilitare i comportamenti di default che non mi interessano
+
+        httpSecurity.formLogin(f -> f.disable());// Non voglio il form di login
+        httpSecurity.csrf(c -> c.disable());// Disabilito la protezione da CSRF
         httpSecurity.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        // Non vogliamo utilizzare le sessioni perché JWT non utilizza le sessioni (STATELESS)
         httpSecurity.authorizeHttpRequests(h -> h.requestMatchers("/**").permitAll());
+        // Disabilitiamo i vari errori 401/403 che riceviamo di default andando a sproteggere ogni endpoint. Lo facciamo perché andremo
+        // ad implementare un meccanismo di autenticazione custom, per il quale stabiliremo noi su quali endpoint intervenire
         httpSecurity.cors(Customizer.withDefaults()); // Abilita CORS secondo configurazione WebConfig
         return httpSecurity.build();
     }
